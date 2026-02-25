@@ -6,19 +6,15 @@
     <title>熊泽城 | AI时代的探索者</title>
     <meta name="description" content="熊泽城的个人作品集 - 专注于Web开发、AI应用探索">
     
-    <!-- 预连接 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- 核心库 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.js"></script>
     
-    <!-- 样式文件 -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Tailwind配置 -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -45,27 +41,22 @@
     
     <!-- 桌面端侧边栏 -->
     <aside id="desktop-sidebar" class="hidden lg:flex fixed left-0 top-0 h-full w-72 glass border-r border-slate-200/50 dark:border-slate-700/50 z-50 flex-col">
-        <!-- Logo区域 -->
         <div class="p-6 border-b border-slate-200/50 dark:border-slate-700/50">
             <div class="flex items-center gap-4">
                 <div class="avatar-ring">
-                    <div class="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center text-white text-xl font-bold">
-                        熊
-                    </div>
+                    <div class="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center text-white text-xl font-bold">熊</div>
                 </div>
                 <div>
                     <h1 class="font-display text-xl font-bold gradient-text">熊泽城</h1>
                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">AI 探索者</p>
                 </div>
             </div>
-            <!-- 状态指示器 -->
             <div class="mt-4 flex items-center gap-2">
                 <span class="status-dot"></span>
                 <span class="text-xs text-slate-500">在线协作中</span>
             </div>
         </div>
         
-        <!-- 导航菜单 -->
         <nav class="flex-1 p-4 overflow-y-auto custom-scrollbar">
             <div class="space-y-1">
                 <div class="nav-section">
@@ -124,7 +115,6 @@
             </div>
         </nav>
         
-        <!-- 底部工具栏 -->
         <div class="p-4 border-t border-slate-200/50 dark:border-slate-700/50">
             <div class="flex items-center justify-between mb-3">
                 <button id="theme-toggle-desktop" class="theme-toggle-btn">
@@ -137,9 +127,7 @@
                     </a>
                 </div>
             </div>
-            <div class="text-center text-xs text-slate-400">
-                Made with <span class="text-red-400">♥</span> by 熊泽城
-            </div>
+            <div class="text-center text-xs text-slate-400">Made with <span class="text-red-400">♥</span> by 熊泽城</div>
         </div>
     </aside>
     
@@ -176,9 +164,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        <nav class="flex-1 p-3 overflow-y-auto custom-scrollbar">
-            <!-- 移动端菜单项会由JS动态生成 -->
-        </nav>
+        <nav id="mobile-drawer-nav" class="flex-1 p-3 overflow-y-auto custom-scrollbar"></nav>
         <div class="p-4 border-t border-slate-200/50 dark:border-slate-700/50">
             <div class="flex justify-center gap-4">
                 <a href="https://github.com/badhope" target="_blank" class="icon-btn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg></a>
@@ -227,27 +213,23 @@
         <section id="page-home" class="page active">
             <div class="hero-section min-h-screen flex items-center">
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 lg:py-20">
-                    <!-- 欢迎标签 -->
-                    <div class="welcome-badge mb-8 opacity-0" style="animation: fadeIn 0.6s ease forwards 0.2s">
+                    <div class="mb-8 opacity-0" style="animation: fadeIn 0.6s ease forwards 0.2s">
                         <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-violet-100 dark:from-sky-900/30 dark:to-violet-900/30 text-sky-700 dark:text-sky-300 text-sm font-medium">
                             <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
                             欢迎来到我的数字空间
                         </span>
                     </div>
                     
-                    <!-- 主标题 -->
                     <h1 class="hero-title font-display text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight opacity-0" style="animation: slideUp 0.8s ease forwards 0.4s">
                         你好，我是<br>
                         <span class="gradient-text typing-cursor" id="typing-text">熊泽城</span>
                     </h1>
                     
-                    <!-- 副标题 -->
                     <p class="hero-subtitle text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8 opacity-0" style="animation: slideUp 0.8s ease forwards 0.6s">
                         大学生 / AI 探索者 / 全栈开发者<br>
                         <span class="opacity-75">致力于用 AI 工具重塑开发流程</span>
                     </p>
                     
-                    <!-- 按钮组 -->
                     <div class="hero-buttons flex flex-col sm:flex-row gap-4 justify-center mb-12 opacity-0" style="animation: slideUp 0.8s ease forwards 0.8s">
                         <button data-page="projects" class="primary-btn px-8 py-4 rounded-2xl font-medium flex items-center justify-center gap-2">
                             <span>查看项目</span>
@@ -344,12 +326,8 @@
                     <p class="text-slate-600 dark:text-slate-400">系统信息与实时数据</p>
                 </div>
                 
-                <!-- 系统信息卡片 -->
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="system-cards">
-                    <!-- 由JS动态生成 -->
-                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="system-cards"></div>
                 
-                <!-- 农历与运势 -->
                 <div class="grid md:grid-cols-2 gap-6 mb-8">
                     <div class="card p-6 rounded-2xl">
                         <h3 class="card-title">
@@ -367,7 +345,6 @@
                     </div>
                 </div>
                 
-                <!-- GitHub 统计 -->
                 <div class="card p-6 rounded-2xl">
                     <h3 class="card-title">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
@@ -391,7 +368,6 @@
                     <p class="text-slate-600 dark:text-slate-400">我的开源项目与作品展示</p>
                 </div>
                 
-                <!-- 筛选器 -->
                 <div class="filter-bar flex flex-wrap gap-2 mb-6">
                     <button class="filter-btn active" data-filter="all">全部</button>
                     <button class="filter-btn" data-filter="frontend">前端</button>
@@ -400,9 +376,7 @@
                     <button class="filter-btn" data-filter="tool">工具</button>
                 </div>
                 
-                <div id="projects-grid" class="projects-grid">
-                    <!-- 由JS动态生成 -->
-                </div>
+                <div id="projects-grid" class="projects-grid"></div>
                 
                 <div class="text-center mt-8">
                     <a href="https://github.com/badhope?tab=repositories" target="_blank" class="secondary-btn inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-medium">
@@ -421,7 +395,6 @@
                     <p class="text-slate-600 dark:text-slate-400">技术分享与学习笔记</p>
                 </div>
                 
-                <!-- 文章来源筛选 -->
                 <div class="filter-bar flex flex-wrap gap-2 mb-6">
                     <button class="source-btn active" data-source="all">全部</button>
                     <button class="source-btn" data-source="csdn">CSDN</button>
@@ -429,15 +402,12 @@
                     <button class="source-btn" data-source="github">GitHub</button>
                 </div>
                 
-                <!-- 搜索框 -->
                 <div class="search-box mb-6">
                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     <input type="text" id="blog-search" placeholder="搜索文章..." class="search-input">
                 </div>
                 
-                <div id="blog-grid" class="blog-grid">
-                    <!-- 由JS动态生成 -->
-                </div>
+                <div id="blog-grid" class="blog-grid"></div>
             </div>
         </section>
         
@@ -449,9 +419,7 @@
                     <p class="text-slate-600 dark:text-slate-400">技术栈与能力展示</p>
                 </div>
                 
-                <div id="skills-container" class="skills-grid">
-                    <!-- 由JS动态生成 -->
-                </div>
+                <div id="skills-container" class="skills-grid"></div>
             </div>
         </section>
         
@@ -464,17 +432,15 @@
                 </div>
                 
                 <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- 转盘 -->
                     <div class="fortune-wheel-container card p-8 rounded-2xl flex flex-col items-center">
                         <div class="wheel-wrapper">
                             <div class="wheel-pointer"></div>
                             <div id="fortune-wheel" class="fortune-wheel"></div>
-                            <button id="spin-btn" class="wheel-center-btn" onclick="spinWheel()">开始</button>
+                            <button id="spin-btn" class="wheel-center-btn">开始</button>
                         </div>
                         <p class="text-sm text-slate-500 mt-4 text-center">点击中心按钮开始抽奖</p>
                     </div>
                     
-                    <!-- 结果 -->
                     <div class="card p-6 rounded-2xl">
                         <h3 class="card-title">
                             <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
@@ -489,7 +455,6 @@
                     </div>
                 </div>
                 
-                <!-- 历史记录 -->
                 <div class="card p-6 rounded-2xl mt-8">
                     <h3 class="card-title">
                         <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -508,20 +473,14 @@
                     <p class="text-slate-600 dark:text-slate-400">休息一下，来玩个小游戏吧</p>
                 </div>
                 
-                <!-- 游戏选择 -->
                 <div class="game-tabs flex flex-wrap gap-3 mb-6">
                     <button class="game-tab active" data-game="sudoku">数独</button>
                     <button class="game-tab" data-game="memory">记忆翻牌</button>
                     <button class="game-tab" data-game="reaction">反应测试</button>
                     <button class="game-tab" data-game="2048">2048</button>
-                    <button class="game-tab" data-game="snake">贪吃蛇</button>
-                    <button class="game-tab" data-game="minesweeper">扫雷</button>
                 </div>
                 
-                <!-- 游戏面板 -->
-                <div id="game-container" class="game-container card p-6 rounded-2xl">
-                    <!-- 由JS动态加载游戏 -->
-                </div>
+                <div id="game-container" class="game-container card p-6 rounded-2xl"></div>
             </div>
         </section>
         
@@ -533,7 +492,6 @@
                     <p class="text-slate-600 dark:text-slate-400">实时热门话题</p>
                 </div>
                 
-                <!-- 热搜来源 -->
                 <div class="trending-tabs flex flex-wrap gap-3 mb-6">
                     <button class="trending-tab active" data-source="weibo">微博热搜</button>
                     <button class="trending-tab" data-source="zhihu">知乎热榜</button>
@@ -541,9 +499,7 @@
                     <button class="trending-tab" data-source="douyin">抖音热点</button>
                 </div>
                 
-                <div id="trending-grid" class="trending-grid">
-                    <!-- 由JS动态生成 -->
-                </div>
+                <div id="trending-grid" class="trending-grid"></div>
             </div>
         </section>
         
@@ -555,7 +511,6 @@
                     <p class="text-slate-600 dark:text-slate-400">了解更多关于我的故事</p>
                 </div>
                 
-                <!-- 个人介绍卡片 -->
                 <div class="about-card card p-6 sm:p-8 rounded-2xl mb-8">
                     <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6">
                         <div class="avatar-large">
@@ -575,10 +530,7 @@
                     </p>
                 </div>
                 
-                <!-- 联系方式 -->
-                <div class="contact-grid grid sm:grid-cols-2 gap-4" id="contact-cards">
-                    <!-- 由JS生成 -->
-                </div>
+                <div class="contact-grid grid sm:grid-cols-2 gap-4" id="contact-cards"></div>
             </div>
         </section>
         
@@ -591,7 +543,6 @@
                 </div>
                 
                 <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- 表单 -->
                     <div class="card p-6 sm:p-8 rounded-2xl">
                         <h3 class="font-display font-bold text-lg mb-6">发送消息</h3>
                         <form id="contact-form" class="contact-form space-y-4">
@@ -623,21 +574,16 @@
                         </form>
                     </div>
                     
-                    <!-- 社交媒体 -->
                     <div class="space-y-6">
                         <div class="card p-6 rounded-2xl">
                             <h3 class="font-display font-bold text-lg mb-4">社交媒体</h3>
-                            <div class="social-list space-y-3" id="social-links-list">
-                                <!-- 由JS生成 -->
-                            </div>
+                            <div class="social-list space-y-3" id="social-links-list"></div>
                         </div>
                         
                         <div class="gradient-card p-6 rounded-2xl text-white">
                             <h3 class="font-display font-bold text-lg mb-2">工作机会</h3>
                             <p class="text-white/90 text-sm mb-4">我目前正在寻找实习机会，如果你有合适的岗位，欢迎联系我！</p>
-                            <button data-page="about" class="white-btn px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors">
-                                了解更多
-                            </button>
+                            <button data-page="about" class="white-btn px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors">了解更多</button>
                         </div>
                     </div>
                 </div>
@@ -646,7 +592,7 @@
     </main>
     
     <!-- 全局搜索模态框 -->
-    <div id="search-modal" class="search-modal fixed inset-0 z-50 hidden">
+    <div id="search-modal" class="search-modal fixed inset-0 z-100 hidden">
         <div class="modal-backdrop" onclick="closeSearchModal()"></div>
         <div class="search-modal-content">
             <div class="search-modal-header">
@@ -664,13 +610,9 @@
         <span id="toast-message">操作成功</span>
     </div>
     
-    <!-- 粒子效果容器 -->
-    <div id="particles-js" class="particles-container fixed inset-0 pointer-events-none z-0"></div>
-    
     <!-- 彩纸效果容器 -->
     <div id="confetti-container" class="fixed inset-0 pointer-events-none z-50"></div>
 
-    <!-- 脚本文件 -->
     <script src="app.js"></script>
 </body>
 </html>
