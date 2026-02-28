@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 页面迷失了 | 熊泽城</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e27; --text-dark-primary: #e6f1ff; --text-dark-sec: #8892b0;
+            --accent-dark: #64ffda; --glow-dark: rgba(100, 255, 218, 0.4); --card-dark: rgba(17, 34, 64, 0.9);
+        }
+        body {
+            margin: 0; font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-dark); color: var(--text-dark-primary);
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            overflow: hidden;
+        }
+        .code {
+            font-family: 'Orbitron', sans-serif; font-size: 150px; font-weight: 900;
+            background: linear-gradient(90deg, var(--accent-dark), #fff, var(--accent-dark));
+            background-size: 200% auto; -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;
+            text-shadow: 0 0 50px var(--glow-dark); margin-bottom: 20px;
+        }
+        @keyframes shine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        h1 { font-size: 28px; margin-bottom: 10px; }
+        p { color: var(--text-dark-sec); margin-bottom: 40px; max-width: 400px; line-height: 1.6; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 15px 35px; background: transparent;
+            border: 2px solid var(--accent-dark); border-radius: 50px;
+            color: var(--accent-dark); text-decoration: none;
+            font-family: 'Orbitron', sans-serif; font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { background: var(--accent-dark); color: var(--bg-dark); transform: translateY(-3px); }
+        .lost-astronaut { font-size: 80px; margin-bottom: 30px; animation: float 4s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+    </style>
+</head>
+<body>
+    <div class="lost-astronaut">🧑‍🚀</div>
+    <div class="code">404</div>
+    <h1>迷失在数据宇宙中</h1>
+    <p>看起来您访问的页面已经消失在星空中，或者被外星人带走了。别担心，我们可以带您回家。</p>
+    <a href="index.html" class="btn">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        返回首页
+    </a>
+</body>
+</html>
