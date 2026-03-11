@@ -22,6 +22,258 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        :root {
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+            transition: opacity 0.8s var(--ease-out-expo), visibility 0.8s;
+        }
+        
+        body:not(.dark-mode) .page-loader {
+            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #e1f0ff 100%);
+        }
+        
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        
+        .loader-animation {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            animation: loaderRingSpin 1.5s linear infinite;
+        }
+        
+        .loader-ring:nth-child(1) {
+            border-top-color: var(--current-accent);
+            animation-duration: 1.5s;
+        }
+        
+        .loader-ring:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-right-color: var(--current-accent);
+            animation-duration: 2s;
+            animation-direction: reverse;
+        }
+        
+        .loader-ring:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-bottom-color: var(--current-accent);
+            animation-duration: 2.5s;
+        }
+        
+        @keyframes loaderRingSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loader-core {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--current-accent);
+            border-radius: 50%;
+            animation: loaderCorePulse 1s ease-in-out infinite;
+            box-shadow: 0 0 30px var(--current-glow);
+        }
+        
+        @keyframes loaderCorePulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+        
+        .loader-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--current-accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: loaderTextPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes loaderTextPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--current-accent), var(--current-accent-hover), var(--current-accent));
+            background-size: 200% 100%;
+            z-index: 10001;
+            transition: width 0.1s linear;
+            animation: progressShine 2s linear infinite;
+        }
+        
+        @keyframes progressShine {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        
+        #bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .bg-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 20% 20%, rgba(0, 151, 167, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(0, 151, 167, 0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(0, 151, 167, 0.04) 0%, transparent 70%);
+            animation: bgGradientShift 20s ease-in-out infinite;
+        }
+        
+        body.dark-mode .bg-gradient {
+            background: radial-gradient(ellipse at 20% 20%, rgba(88, 166, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(88, 166, 255, 0.05) 0%, transparent 70%);
+        }
+        
+        @keyframes bgGradientShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        
+        .bg-mesh {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 151, 167, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 151, 167, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: meshMove 30s linear infinite;
+        }
+        
+        body.dark-mode .bg-mesh {
+            background-image: 
+                linear-gradient(rgba(88, 166, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(88, 166, 255, 0.05) 1px, transparent 1px);
+        }
+        
+        @keyframes meshMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: orbFloat 15s ease-in-out infinite;
+        }
+        
+        .floating-orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(0, 151, 167, 0.3), rgba(0, 200, 200, 0.2));
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-orb:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(0, 200, 200, 0.25), rgba(0, 151, 167, 0.2));
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+        
+        .floating-orb:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 151, 167, 0.2), rgba(100, 200, 255, 0.15));
+            bottom: 20%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+        
+        body.dark-mode .floating-orb:nth-child(1) {
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.3), rgba(100, 150, 255, 0.2));
+        }
+        
+        body.dark-mode .floating-orb:nth-child(2) {
+            background: linear-gradient(135deg, rgba(100, 150, 255, 0.25), rgba(88, 166, 255, 0.2));
+        }
+        
+        body.dark-mode .floating-orb:nth-child(3) {
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.2), rgba(120, 180, 255, 0.15));
+        }
+        
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 30px) scale(1.02); }
+        }
+        
+        .star {
+            position: absolute;
+            background: var(--current-accent);
+            border-radius: 50%;
+            animation: starTwinkle 3s ease-in-out infinite;
+        }
+        
+        body.dark-mode .star {
+            background: #fff;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        
         .offline-banner {
             position: fixed;
             top: 0;
@@ -342,12 +594,64 @@
         .input-hint.error {
             color: #dc3545;
         }
+        
+        .animation-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            background: var(--current-card);
+            border: 1px solid var(--current-border);
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--current-text-sec);
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px var(--current-shadow);
+            transition: all 0.3s var(--ease-smooth);
+        }
+        
+        .animation-toggle:hover {
+            border-color: var(--current-accent);
+            box-shadow: 0 6px 20px var(--current-glow);
+        }
+        
+        .animation-toggle label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .animation-toggle input {
+            accent-color: var(--current-accent);
+            cursor: pointer;
+        }
+        
+        body.reduce-motion *,
+        body.reduce-motion *::before,
+        body.reduce-motion *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
     </style>
 </head>
 <body>
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner-large"></div>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-animation">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-core"></div>
+        </div>
+        <div class="loader-text">Loading</div>
     </div>
+    
+    <div class="scroll-progress" id="scrollProgress"></div>
     
     <div class="offline-banner" id="offlineBanner">
         📡 网络连接已断开，部分功能可能不可用
@@ -355,7 +659,13 @@
     
     <div class="toast" id="toast"></div>
 
-    <div id="bg-container"></div>
+    <div id="bg-container">
+        <div class="bg-gradient"></div>
+        <div class="bg-mesh"></div>
+        <div class="floating-orb"></div>
+        <div class="floating-orb"></div>
+        <div class="floating-orb"></div>
+    </div>
 
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="打开菜单" aria-expanded="false">
         <span></span>
@@ -583,6 +893,13 @@
         </div>
     </main>
 
+    <div class="animation-toggle">
+        <label>
+            <input type="checkbox" id="animationToggle" checked>
+            <span>动画效果</span>
+        </label>
+    </div>
+
     <button class="back-home" id="backHomeBtn" title="返回主页" aria-label="返回主页">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -594,12 +911,13 @@
         'use strict';
         
         const FunLab = {
-            version: '2.1.0',
+            version: '3.0.0',
             results: { fortune: null, omikuji: null },
             luckyHistory: [],
             currentColor: null,
             timerInterval: null,
             isOnline: navigator.onLine,
+            animationsEnabled: true,
             
             escapeHtml(text) {
                 if (typeof text !== 'string') return '';
@@ -642,14 +960,16 @@
             init() {
                 try {
                     this.loadHistory();
+                    this.initLoader();
                     this.initTheme();
                     this.initNavbar();
                     this.initMobileMenu();
                     this.initBackground();
                     this.initNetworkDetection();
                     this.initKeyboardNav();
+                    this.initScrollProgress();
+                    this.initAnimationToggle();
                     this.bindEvents();
-                    this.hideLoading();
                     
                     console.log(`%c🎉 趣味功能实验室 v${this.version}`, 'color: #0097a7; font-size: 14px; font-weight: bold;');
                 } catch (error) {
@@ -676,10 +996,25 @@
                 }
             },
             
-            hideLoading() {
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').classList.add('hidden');
-                }, 300);
+            initLoader() {
+                const loader = document.getElementById('pageLoader');
+                const startTime = Date.now();
+                const minLoadTime = 800;
+                
+                const hideLoader = () => {
+                    const elapsed = Date.now() - startTime;
+                    const remaining = Math.max(0, minLoadTime - elapsed);
+                    
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                    }, remaining);
+                };
+                
+                if (document.readyState === 'complete') {
+                    hideLoader();
+                } else {
+                    window.addEventListener('load', hideLoader);
+                }
             },
             
             initTheme() {
@@ -791,6 +1126,38 @@
                         e.preventDefault();
                         window.location.href = 'index.html';
                     }
+                });
+            },
+            
+            initScrollProgress() {
+                const progressBar = document.getElementById('scrollProgress');
+                
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = (scrollTop / docHeight) * 100;
+                    progressBar.style.width = progress + '%';
+                }, { passive: true });
+            },
+            
+            initAnimationToggle() {
+                const toggle = document.getElementById('animationToggle');
+                const savedPref = localStorage.getItem('animationsEnabled');
+                
+                if (savedPref !== null) {
+                    this.animationsEnabled = savedPref === 'true';
+                    toggle.checked = this.animationsEnabled;
+                }
+                
+                if (!this.animationsEnabled) {
+                    document.body.classList.add('reduce-motion');
+                }
+                
+                toggle.addEventListener('change', () => {
+                    this.animationsEnabled = toggle.checked;
+                    localStorage.setItem('animationsEnabled', this.animationsEnabled);
+                    document.body.classList.toggle('reduce-motion', !this.animationsEnabled);
+                    this.showToast(this.animationsEnabled ? '动画效果已开启' : '动画效果已关闭', 'success');
                 });
             },
             
