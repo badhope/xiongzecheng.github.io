@@ -212,7 +212,7 @@ export default function ResumePage() {
               <h2 className={styles.ctaTitle}>对我感兴趣？</h2>
               <p className={styles.ctaDesc}>期待与志同道合的朋友交流合作</p>
               <motion.a
-                href="/contact"
+                href="/contact/"
                 className={styles.ctaBtn}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

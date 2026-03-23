@@ -159,7 +159,7 @@ export default function Hero() {
           </motion.a>
 
           <motion.a
-            href="/projects"
+            href="/projects/"
             className={styles.ctaSecondary}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
