@@ -37,10 +37,14 @@ export default function ParticleRain({
       length: number;
       speed: number;
       opacity: number;
+      canvasWidth: number;
+      canvasHeight: number;
 
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+      constructor(width: number, height: number) {
+        this.canvasWidth = width;
+        this.canvasHeight = height;
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
         this.length = Math.random() * 20 + 10;
         this.speed = Math.random() * 0.5 + 0.5;
         this.opacity = Math.random() * 0.5 + 0.2;
@@ -48,13 +52,14 @@ export default function ParticleRain({
 
       update() {
         this.y += this.speed;
-        if (this.y > canvas.height) {
+        if (this.y > this.canvasHeight) {
           this.y = 0;
-          this.x = Math.random() * canvas.width;
+          this.x = Math.random() * this.canvasWidth;
         }
       }
 
       draw() {
+        if (!ctx) return;
         ctx.beginPath();
         ctx.strokeStyle = color;
         ctx.globalAlpha = this.opacity;
@@ -68,7 +73,7 @@ export default function ParticleRain({
     const init = () => {
       resize();
       for (let i = 0; i < count; i++) {
-        particles.push(new Particle());
+        particles.push(new Particle(canvas.width, canvas.height));
       }
     };
 
