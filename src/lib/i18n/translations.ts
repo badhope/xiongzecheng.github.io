@@ -54,8 +54,14 @@ export interface SkillsTranslations {
 export interface ProjectsTranslations {
   label: string;
   title: string;
+  subtitle: string;
   viewProject: string;
   viewCode: string;
+  projects: {
+    id: number;
+    title: string;
+    description: string;
+  }[];
 }
 
 export interface FooterTranslations {
@@ -67,9 +73,16 @@ export interface FooterTranslations {
 export interface ContactTranslations {
   label: string;
   title: string;
+  subtitle: string;
   email: string;
   message: string;
   send: string;
+  namePlaceholder: string;
+  emailPlaceholder: string;
+  messagePlaceholder: string;
+  successTitle: string;
+  successDesc: string;
+  socialsTitle: string;
 }
 
 export interface ToolsTranslations {
@@ -155,10 +168,10 @@ export const en: Translations = {
       contributions: 'Contributions',
     },
     timeline: [
-      { year: '20XX', title: 'Started Data Science Program', desc: 'Began systematic learning of data science and big data technology' },
-      { year: '20XX', title: 'Full-Stack Development Journey', desc: 'Embraced AI-assisted development from frontend to backend' },
-      { year: '20XX', title: 'Open Source Contributor', desc: 'Actively participated in open source projects and contributed code' },
-      { year: 'Now', title: 'AI Era Explorer', desc: 'Exploring cutting-edge technologies, riding the wave of the era' },
+      { year: '2021', title: 'Data Science Studies', desc: 'Systematic learning of data science and big data technology' },
+      { year: '2022', title: 'Full-Stack Development', desc: 'Mastered frontend to backend web development stack' },
+      { year: '2023', title: 'AI Technology Deep Dive', desc: 'In-depth learning of machine learning and AI applications' },
+      { year: '2024', title: 'Continuous Growth', desc: 'Exploring cutting-edge technologies, creating value through code' },
     ],
   },
   skills: {
@@ -174,8 +187,15 @@ export const en: Translations = {
   projects: {
     label: 'Projects',
     title: 'Featured',
+    subtitle: 'Every project is an exploration of technology and innovation',
     viewProject: 'View Project',
     viewCode: 'View Code',
+    projects: [
+      { id: 1, title: 'AI-Powered E-Commerce Platform', description: 'Modern shopping experience with AI recommendations, intelligent search and personalized suggestions' },
+      { id: 2, title: 'Real-Time Data Visualization', description: 'Enterprise-grade analytics dashboard with multi-dimensional real-time monitoring' },
+      { id: 3, title: 'Cross-Platform Social App', description: 'Interest-based social network with real-time chat and content sharing' },
+      { id: 4, title: 'Distributed Crawler System', description: 'Scalable data collection framework with distributed crawling and cleaning capabilities' },
+    ],
   },
   footer: {
     builtWith: 'Built with',
@@ -185,9 +205,16 @@ export const en: Translations = {
   contact: {
     label: 'Contact',
     title: 'Get in Touch',
+    subtitle: 'Have a project idea or want to collaborate? Feel free to reach out!',
     email: 'Email',
     message: 'Message',
     send: 'Send Message',
+    namePlaceholder: 'Your name',
+    emailPlaceholder: 'Your email',
+    messagePlaceholder: 'Your message...',
+    successTitle: 'Message sent!',
+    successDesc: 'Thank you for reaching out. I will get back to you soon.',
+    socialsTitle: 'Social Platforms',
   },
   tools: {
     label: 'Tools',
@@ -254,10 +281,10 @@ export const zh: Translations = {
       contributions: '开源贡献',
     },
     timeline: [
-      { year: '20XX', title: '入学数据科学专业', desc: '开始系统学习数据科学与大数据技术' },
-      { year: '20XX', title: '全栈开发之路', desc: '从前端到后端，拥抱AI辅助开发' },
-      { year: '20XX', title: '开源贡献者', desc: '积极参与开源项目，贡献代码' },
-      { year: 'Now', title: 'AI时代探索者', desc: '探索前沿技术，做时代的弄潮儿' },
+      { year: '2021', title: '数据科学专业学习', desc: '系统学习数据科学与大数据技术，打下坚实基础' },
+      { year: '2022', title: '全栈开发之路', desc: '从前端到后端，全面掌握Web开发技术栈' },
+      { year: '2023', title: 'AI技术深耕', desc: '深入学习机器学习与人工智能，探索AI应用边界' },
+      { year: '2024', title: '持续成长中', desc: '不断探索前沿技术，致力于用技术创造价值' },
     ],
   },
   skills: {
@@ -273,8 +300,15 @@ export const zh: Translations = {
   projects: {
     label: '项目',
     title: '精选',
+    subtitle: '每一个项目都是一次技术探索与创新的尝试',
     viewProject: '查看项目',
     viewCode: '查看代码',
+    projects: [
+      { id: 1, title: 'AI驱动的电商平台', description: '融合AI推荐的现代化购物体验，支持智能搜索与个性化推荐' },
+      { id: 2, title: '实时数据可视化平台', description: '企业级数据分析仪表盘，支持多维度实时数据监控' },
+      { id: 3, title: '跨平台社交应用', description: '基于兴趣图谱的社交网络，支持实时聊天与内容分享' },
+      { id: 4, title: '智能爬虫系统', description: '分布式爬虫框架，支持大规模数据采集与清洗' },
+    ],
   },
   footer: {
     builtWith: '用',
@@ -284,9 +318,16 @@ export const zh: Translations = {
   contact: {
     label: '联系',
     title: '联系我',
+    subtitle: '有项目合作或技术交流？随时欢迎联系我',
     email: '邮箱',
     message: '留言',
     send: '发送消息',
+    namePlaceholder: '您的姓名',
+    emailPlaceholder: '您的邮箱',
+    messagePlaceholder: '请输入留言内容...',
+    successTitle: '消息已发送！',
+    successDesc: '感谢你的留言，我会尽快回复。',
+    socialsTitle: '社交平台',
   },
   tools: {
     label: '工具',

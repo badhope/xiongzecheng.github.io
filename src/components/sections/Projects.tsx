@@ -4,11 +4,9 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './Projects.module.css';
 
-const projects = [
+const projectsStatic = [
   {
     id: 1,
-    title: 'AI驱动的电商平台',
-    description: '融合AI推荐的现代化购物体验，支持智能搜索与个性化推荐',
     tags: ['Next.js', 'Python', 'TensorFlow', 'PostgreSQL'],
     emoji: '🛒',
     gradient: 'linear-gradient(135deg, #00d4ff, #bf5af2)',
@@ -18,8 +16,6 @@ const projects = [
   },
   {
     id: 2,
-    title: '实时数据可视化平台',
-    description: '企业级数据分析仪表盘，支持多维度实时数据监控',
     tags: ['React', 'D3.js', 'Node.js', 'Redis'],
     emoji: '📊',
     gradient: 'linear-gradient(135deg, #bf5af2, #ff375f)',
@@ -29,8 +25,6 @@ const projects = [
   },
   {
     id: 3,
-    title: '跨平台社交应用',
-    description: '基于兴趣图谱的社交网络，支持实时聊天与内容分享',
     tags: ['React Native', 'Firebase', 'Node.js'],
     emoji: '💬',
     gradient: 'linear-gradient(135deg, #ff375f, #ff6b35)',
@@ -40,8 +34,6 @@ const projects = [
   },
   {
     id: 4,
-    title: '智能爬虫系统',
-    description: '分布式爬虫框架，支持大规模数据采集与清洗',
     tags: ['Python', 'Scrapy', 'MongoDB', 'Docker'],
     emoji: '🤖',
     gradient: 'linear-gradient(135deg, #30d158, #00d4ff)',
@@ -53,6 +45,7 @@ const projects = [
 
 export default function Projects() {
   const { t, language } = useLanguage();
+  const projects = t.projects.projects;
 
   return (
     <section id="projects" className={styles.projects}>
@@ -68,18 +61,16 @@ export default function Projects() {
           <h2 className={styles.title}>
             <span className="gradient-text">{t.projects.title}</span>
           </h2>
-          <p className={styles.subtitle}>
-            {language === 'zh'
-              ? '每一个项目都是一次技术探索与创新的尝试'
-              : 'Every project is an exploration of technology and innovation'}
-          </p>
+          <p className={styles.subtitle}>{t.projects.subtitle}</p>
         </motion.div>
 
         <div className={styles.grid}>
-          {projects.map((project, index) => (
+          {projects.map((project, index) => {
+            const staticData = projectsStatic.find(p => p.id === project.id) || projectsStatic[0];
+            return (
             <motion.a
               key={project.id}
-              href={project.link}
+              href={staticData.link}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.projectCard}
@@ -91,30 +82,30 @@ export default function Projects() {
             >
               <div
                 className={styles.cardGlow}
-                style={{ background: project.gradient }}
+                style={{ background: staticData.gradient }}
               />
               <div className={styles.cardContent}>
                 <div className={styles.cardHeader}>
-                  <span className={styles.emoji}>{project.emoji}</span>
+                  <span className={styles.emoji}>{staticData.emoji}</span>
                   <div className={styles.cardStats}>
                     <span className={styles.stat}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0l3.09 6.26L22 7.27l-5 4.87 1.18 6.88L12 15.77l-6.18 3.25L7 12.14 2 7.27l6.91-1.01L12 0z"/>
                       </svg>
-                      {project.stars}
+                      {staticData.stars}
                     </span>
                     <span className={styles.stat}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 2l2 6h8l2-6h-2v14H8V2H6zm2 2h4v4H8V4zm0 6h4v4H8v-4z"/>
                       </svg>
-                      {project.forks}
+                      {staticData.forks}
                     </span>
                   </div>
                 </div>
                 <h3 className={styles.cardTitle}>{project.title}</h3>
                 <p className={styles.cardDesc}>{project.description}</p>
                 <div className={styles.cardTags}>
-                  {project.tags.map((tag) => (
+                  {staticData.tags.map((tag) => (
                     <span key={tag} className={styles.tag}>{tag}</span>
                   ))}
                 </div>
@@ -125,7 +116,8 @@ export default function Projects() {
                 </svg>
               </div>
             </motion.a>
-          ))}
+            );
+          })}
         </div>
 
         <motion.div

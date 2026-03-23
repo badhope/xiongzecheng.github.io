@@ -4,16 +4,22 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/ui/Navigation';
 import Footer from '@/components/sections/Footer';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './page.module.css';
 
-const socials = [
-  { platform: 'GitHub', url: 'https://github.com/badhope', icon: '🐙', desc: '开源项目与代码' },
-  { platform: 'CSDN', url: 'https://blog.csdn.net/weixin_56622231', icon: '📚', desc: '技术博客文章' },
-  { platform: '稀土掘金', url: 'https://juejin.cn/user/2350111542479753', icon: '💎', desc: '开发心得分享' },
-  { platform: 'Email', url: 'mailto:x18825407105@outlook.com', icon: '📧', desc: '商务合作联系' },
+const socialsData = [
+  { platform: 'GitHub', url: 'https://github.com/badhope', icon: '🐙' },
+  { platform: 'CSDN', url: 'https://blog.csdn.net/weixin_56622231', icon: '📚' },
+  { platform: '稀土掘金', url: 'https://juejin.cn/user/2350111542479753', icon: '💎' },
+  { platform: 'Email', url: 'mailto:x18825407105@outlook.com', icon: '📧' },
 ];
 
+const socialsDescEn = ['Open source projects', 'Tech blog articles', 'Development insights', 'Business cooperation'];
+const socialsDescZh = ['开源项目与代码', '技术博客文章', '开发心得分享', '商务合作联系'];
+
 export default function ContactPage() {
+  const { t, language } = useLanguage();
+  const isZh = language === 'zh';
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
@@ -33,13 +39,11 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className={styles.label}>联系</span>
+            <span className={styles.label}>{t.contact.label}</span>
             <h1 className={styles.title}>
-              <span className="gradient-text">保持</span>联系
+              <span className="gradient-text">{isZh ? '保持' : 'Get in'}</span>{isZh ? '联系' : ' Touch'}
             </h1>
-            <p className={styles.subtitle}>
-              有项目合作或技术交流？随时欢迎联系我
-            </p>
+            <p className={styles.subtitle}>{t.contact.subtitle}</p>
           </motion.div>
         </section>
 
@@ -52,9 +56,9 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className={styles.sectionTitle}>社交平台</h2>
+                <h2 className={styles.sectionTitle}>{t.contact.socialsTitle}</h2>
                 <div className={styles.socialGrid}>
-                  {socials.map((social, i) => (
+                  {socialsData.map((social, i) => (
                     <motion.a
                       key={social.platform}
                       href={social.url}
@@ -69,7 +73,7 @@ export default function ContactPage() {
                       <span className={styles.socialIcon}>{social.icon}</span>
                       <div className={styles.socialInfo}>
                         <h3>{social.platform}</h3>
-                        <p>{social.desc}</p>
+                        <p>{isZh ? socialsDescZh[i] : socialsDescEn[i]}</p>
                       </div>
                       <svg className={styles.socialArrow} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -85,7 +89,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <h2 className={styles.sectionTitle}>发送消息</h2>
+                <h2 className={styles.sectionTitle}>{isZh ? '发送消息' : 'Send Message'}</h2>
                 {submitted ? (
                   <motion.div
                     className={styles.successMessage}
@@ -93,40 +97,40 @@ export default function ContactPage() {
                     animate={{ opacity: 1, scale: 1 }}
                   >
                     <span className={styles.successIcon}>✨</span>
-                    <h3>消息已发送！</h3>
-                    <p>感谢你的留言，我会尽快回复。</p>
+                    <h3>{t.contact.successTitle}</h3>
+                    <p>{t.contact.successDesc}</p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="name">姓名</label>
+                      <label htmlFor="name">{isZh ? '姓名' : 'Name'}</label>
                       <input
                         type="text"
                         id="name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="你的名字"
+                        placeholder={t.contact.namePlaceholder}
                         required
                       />
                     </div>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="email">邮箱</label>
+                      <label htmlFor="email">{t.contact.email}</label>
                       <input
                         type="email"
                         id="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="your@email.com"
+                        placeholder={t.contact.emailPlaceholder}
                         required
                       />
                     </div>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="message">留言</label>
+                      <label htmlFor="message">{t.contact.message}</label>
                       <textarea
                         id="message"
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="想和我说些什么..."
+                        placeholder={t.contact.messagePlaceholder}
                         rows={5}
                         required
                       />
@@ -137,7 +141,7 @@ export default function ContactPage() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span>发送消息</span>
+                      <span>{t.contact.send}</span>
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                       </svg>
