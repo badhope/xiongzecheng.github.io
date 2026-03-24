@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -9,87 +9,138 @@ import styles from './not-found.module.css';
 export default function NotFound() {
   const { language } = useLanguage();
   const isZh = language === 'zh';
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    console.warn('404 - Page not found');
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const stars: { x: number; y: number; size: number; speed: number; opacity: number }[] = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speed: Math.random() * 0.5 + 0.1,
+        opacity: Math.random() * 0.8 + 0.2,
+      });
+    }
+
+    let animId: number;
+    const animate = () => {
+      ctx.fillStyle = 'rgba(2, 5, 16, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach(star => {
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(212, 175, 55, ${star.opacity})`;
+        ctx.fill();
+      });
+
+      animId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
     <div className={styles.container}>
+      <canvas ref={canvasRef} className={styles.canvas} />
+
       <div className={styles.content}>
+        {/* Astronaut */}
         <motion.div
-          className={styles.errorCode}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          className={styles.astronaut}
+          animate={{ y: [0, -15, 0], rotate: [0, 5, -5, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <span className={styles.code}>4</span>
-          <span className={styles.icon}>🔍</span>
-          <span className={styles.code}>4</span>
+          🧑‍🚀
         </motion.div>
 
+        {/* 404 */}
         <motion.h1
-          className={styles.title}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          className={styles.errorCode}
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 100 }}
         >
-          {isZh ? '页面未找到' : 'Page Not Found'}
+          404
         </motion.h1>
 
         <motion.p
-          className={styles.description}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          className={styles.title}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
         >
-          {isZh
-            ? '抱歉，您访问的页面不存在或已被移除。'
-            : 'Sorry, the page you are looking for does not exist or has been removed.'}
+          {isZh ? '迷失在星际空间中...' : 'Lost in interstellar space...'}
         </motion.p>
 
+        <motion.p
+          className={styles.description}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          {isZh
+            ? '这个星域似乎不存在，或者已经漂移到了未知空间。'
+            : 'This star sector doesn\'t exist, or has drifted into unknown space.'}
+        </motion.p>
+
+        {/* Terminal */}
+        <motion.div
+          className={styles.terminal}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.7 }}
+        >
+          <span className={styles.prompt}>$</span>
+          <span className={styles.command}>
+            {isZh ? '导航错误：目标星域未找到' : 'NAV ERROR: Target sector not found'}
+          </span>
+        </motion.div>
+
+        {/* Actions */}
         <motion.div
           className={styles.actions}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.9 }}
         >
-          <Link href="/" className={styles.primaryBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              <polyline points="9,22 9,12 15,12 15,22"/>
-            </svg>
-            {isZh ? '返回首页' : 'Go Home'}
+          <Link href="/home" className={styles.btnPrimary}>
+            {isZh ? '🏠 返回空间站' : '🏠 Return to Starbase'}
           </Link>
-
-          <Link href="/blog/" className={styles.secondaryBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/>
-            </svg>
-            {isZh ? '浏览博客' : 'Browse Blog'}
-          </Link>
+          <button
+            className={styles.btnSecondary}
+            onClick={() => {
+              const url = 'https://github.com/badhope/github.io/issues/new?template=bug_report.md';
+              window.open(url, '_blank');
+            }}
+          >
+            {isZh ? '🐛 报告问题' : '🐛 Report Issue'}
+          </button>
         </motion.div>
-
-        <motion.div
-          className={styles.suggestions}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <span className={styles.suggestionsTitle}>
-            {isZh ? '您可以尝试：' : 'You might want to:'}
-          </span>
-          <ul className={styles.suggestionsList}>
-            <li><Link href="/projects/">{isZh ? '查看项目' : 'View Projects'}</Link></li>
-            <li><Link href="/tools/">{isZh ? '探索工具' : 'Explore Tools'}</Link></li>
-            <li><Link href="/contact/">{isZh ? '联系我' : 'Contact Me'}</Link></li>
-          </ul>
-        </motion.div>
-      </div>
-
-      <div className={styles.backgroundEffect}>
-        <div className={styles.gradientOrb} />
-        <div className={styles.gradientOrb2} />
       </div>
     </div>
   );

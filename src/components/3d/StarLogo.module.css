@@ -1,0 +1,25 @@
+.container {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.container canvas {
+  cursor: grab;
+}
+
+.container canvas:active {
+  cursor: grabbing;
+}
+
+.hint {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(212, 175, 55, 0.4);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}

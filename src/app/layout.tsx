@@ -5,35 +5,41 @@ import Providers from "@/components/Providers";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0a0a0f",
+  themeColor: "#020510",
 };
 
 export const metadata: Metadata = {
-  title: "badhope | 全栈开发者 & AI时代探索者",
+  title: "badhope's Starbase | Full-Stack Developer & AI Explorer",
   description:
-    "badhope - 数据科学与大数据技术专业，全栈开发者，AI时代探索者。专注于前沿技术，开源贡献者。",
+    "Welcome to badhope's Starbase — A cosmic hub showcasing full-stack development, AI exploration, and creative coding. Built with Next.js, TypeScript, and Three.js.",
   keywords: [
     "badhope",
-    "全栈开发",
-    "数据科学",
-    "AI",
-    "Python",
+    "Starbase",
+    "full-stack developer",
+    "AI explorer",
+    "portfolio",
     "Next.js",
-    "开发者",
-    "开源贡献",
+    "TypeScript",
+    "Three.js",
+    "web development",
+    "前端开发",
+    "全栈开发",
+    "AI探索",
   ],
   authors: [{ name: "badhope" }],
+  creator: "badhope",
   openGraph: {
-    title: "badhope | 全栈开发者 & AI时代探索者",
-    description:
-      "数据科学与大数据技术专业，全栈开发者，AI时代探索者。",
     type: "website",
     locale: "zh_CN",
+    alternateLocale: "en_US",
+    title: "badhope's Starbase",
+    description: "Full-Stack Developer & AI Explorer | 用代码构建星辰大海",
+    siteName: "badhope's Starbase",
   },
   twitter: {
     card: "summary_large_image",
-    title: "badhope | 全栈开发者",
-    description: "AI时代探索者 & 开源贡献者",
+    title: "badhope's Starbase",
+    description: "Full-Stack Developer & AI Explorer",
   },
   robots: {
     index: true,
@@ -43,20 +49,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap"
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased noise-overlay">
         <Providers />
         {children}
       </body>

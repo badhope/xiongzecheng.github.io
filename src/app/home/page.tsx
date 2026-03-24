@@ -1,38 +1,42 @@
 'use client';
 
-import { useState } from 'react';
-import Loader from '@/components/animations/Loader';
-import Navigation from '@/components/ui/Navigation';
-import BackToTop from '@/components/ui/BackToTop';
-import Hero from '@/components/sections/Hero';
-import About from '@/components/sections/About';
-import Skills from '@/components/sections/Skills';
-import Projects from '@/components/sections/Projects';
-import Footer from '@/components/sections/Footer';
+import { useState, useCallback } from 'react';
+import dynamic from 'next/dynamic';
+import HeroSection from '@/components/sections/HeroSection';
+import AboutSection from '@/components/sections/AboutSection';
+import DailyQuote from '@/components/sections/DailyQuote';
+import StarNavigation from '@/components/ui/StarNavigation';
+import SettingsPanel from '@/components/settings/SettingsPanel';
+import WarpLoader from '@/components/animations/WarpLoader';
+import styles from './home.module.css';
+
+const Footer = dynamic(() => import('@/components/sections/Footer'), { ssr: false });
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(true);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  const handleLoaderComplete = useCallback(() => {
+    setShowLoader(false);
+  }, []);
 
   return (
-    <>
-      {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
-
-      <div
-        style={{
-          opacity: isLoading ? 0 : 1,
-          transition: 'opacity 0.5s ease',
-        }}
-      >
-        <Navigation />
-        <BackToTop />
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-        </main>
-        <Footer />
-      </div>
-    </>
+    <div className={styles.page}>
+      {showLoader && <WarpLoader onComplete={handleLoaderComplete} />}
+      {!showLoader && (
+        <>
+          <StarNavigation />
+          <SettingsPanel isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
+          <main className={styles.main}>
+            <HeroSection />
+            <div className={styles.divider} />
+            <AboutSection />
+            <div className={styles.divider} />
+            <DailyQuote />
+          </main>
+          <Footer />
+        </>
+      )}
+    </div>
   );
 }

@@ -1,267 +1,153 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import Navigation from '@/components/ui/Navigation';
-import Footer from '@/components/sections/Footer';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
-import styles from './page.module.css';
+import StarNavigation from '@/components/ui/StarNavigation';
+import styles from './resume.module.css';
+
+const skills = {
+  zh: {
+    frontend: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'JavaScript', 'HTML5/CSS3', 'Tailwind CSS', 'Sass'],
+    backend: ['Node.js', 'Python', 'Java', 'Go', 'Express', 'FastAPI', 'Spring Boot'],
+    ai: ['PyTorch', 'TensorFlow', 'LangChain', 'OpenAI API', 'Hugging Face', 'Scikit-learn'],
+    bigdata: ['Spark', 'Hadoop', 'Kafka', 'Elasticsearch', 'Flink', 'ClickHouse'],
+    devops: ['Docker', 'Kubernetes', 'GitHub Actions', 'AWS', 'Nginx', 'Linux'],
+    database: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'ClickHouse'],
+  },
+  en: {
+    frontend: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'JavaScript', 'HTML5/CSS3', 'Tailwind CSS', 'Sass'],
+    backend: ['Node.js', 'Python', 'Java', 'Go', 'Express', 'FastAPI', 'Spring Boot'],
+    ai: ['PyTorch', 'TensorFlow', 'LangChain', 'OpenAI API', 'Hugging Face', 'Scikit-learn'],
+    bigdata: ['Spark', 'Hadoop', 'Kafka', 'Elasticsearch', 'Flink', 'ClickHouse'],
+    devops: ['Docker', 'Kubernetes', 'GitHub Actions', 'AWS', 'Nginx', 'Linux'],
+    database: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'ClickHouse'],
+  },
+};
+
+const skillCategories = [
+  { key: 'frontend' as const, labelZh: '前端开发', labelEn: 'Frontend', icon: '🎨' },
+  { key: 'backend' as const, labelZh: '后端开发', labelEn: 'Backend', icon: '⚙️' },
+  { key: 'ai' as const, labelZh: 'AI / 机器学习', labelEn: 'AI / ML', icon: '🤖' },
+  { key: 'bigdata' as const, labelZh: '大数据', labelEn: 'Big Data', icon: '📊' },
+  { key: 'devops' as const, labelZh: 'DevOps', labelEn: 'DevOps', icon: '🔧' },
+  { key: 'database' as const, labelZh: '数据库', labelEn: 'Database', icon: '🗄️' },
+];
 
 export default function ResumePage() {
-  const { t, language } = useLanguage();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  if (!mounted) {
-    return (
-      <div className={styles.page}>
-        <Navigation />
-        <main className={styles.main}>
-          <div className={styles.loading}>Loading...</div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  const resume = t.resume;
-  const currentLocation = language === 'zh' ? resume.location.zh : resume.location.en;
+  const { language } = useLanguage();
+  const isZh = language === 'zh';
+  const currentSkills = isZh ? skills.zh : skills.en;
 
   return (
     <div className={styles.page}>
-      <Navigation />
+      <StarNavigation />
 
       <main className={styles.main}>
-        <section className={styles.hero}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className={styles.label}>{resume.label}</span>
-            <h1 className={styles.title}>
-              <span className="gradient-text">bad</span>hope
-            </h1>
-            <p className={styles.subtitle}>{resume.subtitle}</p>
-            <div className={styles.contact}>
-              <span>📍 {currentLocation}</span>
-              <span>📧 x18825407105@outlook.com</span>
-            </div>
-          </motion.div>
+        <motion.div
+          className={styles.header}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <span className={styles.tag}>{isZh ? '// 简历' : '// Resume'}</span>
+          <h1 className={styles.title}>{isZh ? '星际档案' : 'Stellar Profile'}</h1>
+          <p className={styles.subtitle}>badhope</p>
+        </motion.div>
 
-          <div className={styles.buttonGroup}>
-            <motion.a
-              href="/resume.pdf"
-              download="badhope_resume.pdf"
-              className={styles.downloadBtn}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-              </svg>
-              <span>{resume.download}</span>
-            </motion.a>
-
-            <motion.button
-              onClick={handlePrint}
-              className={styles.printBtn}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/>
-              </svg>
-              <span>{resume.print}</span>
-            </motion.button>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <div className={styles.container}>
-            <motion.h2
-              className={styles.sectionTitle}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className={styles.sectionNumber}>01</span>
-              {resume.sections.summary}
-            </motion.h2>
-            <motion.div
-              className={styles.summary}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <p>{resume.summary.p1}</p>
-              <p>{resume.summary.p2}</p>
-              <p>{resume.summary.p3}</p>
-            </motion.div>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <div className={styles.container}>
-            <motion.h2
-              className={styles.sectionTitle}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className={styles.sectionNumber}>02</span>
-              {resume.sections.skills}
-            </motion.h2>
-            <div className={styles.skillsGrid}>
-              <motion.div
-                className={styles.skillCard}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0 }}
-              >
-                <h3 className={styles.skillCategory}>{resume.skills.frontend}</h3>
-                <div className={styles.skillTags}>
-                  {resume.skills.frontendTags.map((skill) => (
-                    <span key={skill} className={styles.skillTag}>{skill}</span>
-                  ))}
-                </div>
-              </motion.div>
-              <motion.div
-                className={styles.skillCard}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <h3 className={styles.skillCategory}>{resume.skills.backend}</h3>
-                <div className={styles.skillTags}>
-                  {resume.skills.backendTags.map((skill) => (
-                    <span key={skill} className={styles.skillTag}>{skill}</span>
-                  ))}
-                </div>
-              </motion.div>
-              <motion.div
-                className={styles.skillCard}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <h3 className={styles.skillCategory}>{resume.skills.aiTools}</h3>
-                <div className={styles.skillTags}>
-                  {resume.skills.aiToolsTags.map((skill) => (
-                    <span key={skill} className={styles.skillTag}>{skill}</span>
-                  ))}
-                </div>
-              </motion.div>
+        {/* Profile Summary */}
+        <motion.div
+          className={styles.profileCard}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className={styles.profileHeader}>
+            <span className={styles.profileIcon}>⭐</span>
+            <div>
+              <h2 className={styles.profileName}>badhope</h2>
+              <p className={styles.profileTitle}>
+                {isZh ? '全栈开发者 · AI 探索者 · 代码创造者' : 'Full-Stack Developer · AI Explorer · Code Creator'}
+              </p>
             </div>
           </div>
-        </section>
+          <p className={styles.profileBio}>
+            {isZh
+              ? '在职开发者，专注于全栈开发和人工智能领域。拥有从前端到后端、从数据科学到机器学习的完整技术栈经验。热衷于探索前沿技术，用代码构建创新解决方案。'
+              : 'Developer focused on full-stack development and AI. Experienced with the complete tech stack from frontend to backend, data science to machine learning. Passionate about exploring cutting-edge technology and building innovative solutions with code.'}
+          </p>
+        </motion.div>
 
-        <section className={styles.section}>
-          <div className={styles.container}>
-            <motion.h2
-              className={styles.sectionTitle}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className={styles.sectionNumber}>03</span>
-              {resume.sections.experience}
-            </motion.h2>
-            {resume.experience.map((exp, i) => (
+        {/* Skills */}
+        <motion.div
+          className={styles.skillsSection}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <h2 className={styles.sectionTitle}>
+            {isZh ? '🛠️ 技术装备' : '🛠️ Tech Arsenal'}
+          </h2>
+          <div className={styles.skillsGrid}>
+            {skillCategories.map((cat, index) => (
               <motion.div
-                key={i}
-                className={styles.expCard}
+                key={cat.key}
+                className={styles.skillCard}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+                whileHover={{ y: -4, borderColor: 'rgba(212, 175, 55, 0.3)' }}
               >
-                <div className={styles.expHeader}>
-                  <div>
-                    <h3 className={styles.expTitle}>{exp.title}</h3>
-                    <span className={styles.expCompany}>{exp.company}</span>
-                  </div>
-                  <span className={styles.expPeriod}>{exp.period}</span>
+                <div className={styles.skillCardHeader}>
+                  <span className={styles.skillIcon}>{cat.icon}</span>
+                  <h3>{isZh ? cat.labelZh : cat.labelEn}</h3>
                 </div>
-                <p className={styles.expDesc}>{exp.description}</p>
+                <div className={styles.skillTags}>
+                  {currentSkills[cat.key].map(skill => (
+                    <span key={skill} className={styles.skillTag}>{skill}</span>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
-        </section>
+        </motion.div>
 
-        <section className={styles.section}>
-          <div className={styles.container}>
-            <motion.h2
-              className={styles.sectionTitle}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className={styles.sectionNumber}>04</span>
-              {resume.sections.education}
-            </motion.h2>
-            {resume.education.map((edu, i) => (
-              <motion.div
-                key={i}
-                className={styles.eduCard}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <div className={styles.eduHeader}>
-                  <div>
-                    <h3 className={styles.eduDegree}>{edu.degree}</h3>
-                    <span className={styles.eduSchool}>{edu.school}</span>
-                  </div>
-                  <span className={styles.eduPeriod}>{edu.period}</span>
-                </div>
-                <p className={styles.eduDesc}>{edu.description}</p>
-              </motion.div>
-            ))}
+        {/* Timeline */}
+        <motion.div
+          className={styles.timelineSection}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <h2 className={styles.sectionTitle}>
+            {isZh ? '📅 航行日志' : '📅 Voyage Log'}
+          </h2>
+          <div className={styles.timeline}>
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineDot} />
+              <div className={styles.timelineContent}>
+                <span className={styles.timelineYear}>2024</span>
+                <h3>{isZh ? '数据科学启航' : 'Data Science Journey'}</h3>
+                <p>{isZh ? '系统学习数据科学与大数据技术' : 'Systematically studied data science and big data'}</p>
+              </div>
+            </div>
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineDot} />
+              <div className={styles.timelineContent}>
+                <span className={styles.timelineYear}>2025</span>
+                <h3>{isZh ? '全栈开发' : 'Full-Stack Development'}</h3>
+                <p>{isZh ? '掌握完整技术栈，构建真实项目' : 'Mastered full tech stack, built real projects'}</p>
+              </div>
+            </div>
+            <div className={styles.timelineItem}>
+              <div className={`${styles.timelineDot} ${styles.dotActive}`} />
+              <div className={styles.timelineContent}>
+                <span className={styles.timelineYear}>2026</span>
+                <h3>{isZh ? 'AI + 全栈深入' : 'AI + Full-Stack Deep Dive'}</h3>
+                <p>{isZh ? '深入AI与全栈融合，持续学习成长' : 'Deep diving into AI + full-stack, continuously learning'}</p>
+              </div>
+            </div>
           </div>
-        </section>
-
-        <section className={styles.cta}>
-          <div className={styles.container}>
-            <motion.div
-              className={styles.ctaContent}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className={styles.ctaTitle}>{language === 'zh' ? '对我感兴趣？' : 'Interested?'}</h2>
-              <p className={styles.ctaDesc}>{language === 'zh' ? '期待与志同道合的朋友交流合作' : 'Looking forward to connecting with like-minded friends'}</p>
-              <motion.a
-                href="/contact/"
-                className={styles.ctaBtn}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {t.nav.contact}
-              </motion.a>
-            </motion.div>
-          </div>
-        </section>
+        </motion.div>
       </main>
-
-      <Footer />
     </div>
   );
 }

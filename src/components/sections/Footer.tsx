@@ -1,104 +1,94 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { socialLinks, siteConfig } from '@/data/config';
 import styles from './Footer.module.css';
 
-const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com/badhope', icon: '🐙' },
-  { label: 'CSDN', href: 'https://blog.csdn.net/weixin_56622231', icon: '📚' },
-  { label: '掘金', href: 'https://juejin.cn/user/2350111542479753', icon: '💎' },
-  { label: 'Email', href: 'mailto:x18825407105@outlook.com', icon: '📧' },
-];
-
 export default function Footer() {
-  const { t, language } = useLanguage();
-
-  const navLinks = [
-    { label: t.nav.home, href: '/' },
-    { label: t.nav.about, href: '/#about' },
-    { label: t.nav.projects, href: '/#projects' },
-    { label: t.nav.blog, href: '/blog' },
-    { label: t.nav.tools, href: '/tools' },
-    { label: t.nav.resume, href: '/resume' },
-  ];
+  const { language } = useLanguage();
+  const isZh = language === 'zh';
 
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <motion.div
-          className={styles.top}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className={styles.brand}>
-            <div className={styles.logo}>
-              <span className={styles.logoBracket}>{"{"}</span>
-              <span className={styles.logoText}>bad</span>
-              <span className={styles.logoHighlight}>hope</span>
-              <span className={styles.logoBracket}>{"}"}</span>
-            </div>
-            <p className={styles.tagline}>
-              {language === 'zh'
-                ? '全栈开发者 · AI时代探索者 · 开源贡献者'
-                : 'Full-Stack Developer · AI Era Explorer · Open Source Contributor'}
-            </p>
-          </div>
+        <div className={styles.divider} />
 
-          <div className={styles.navSection}>
-            <span className={styles.navTitle}>{language === 'zh' ? '导航' : 'Navigation'}</span>
-            <div className={styles.navLinks}>
-              {navLinks.map((link) => (
-                <a key={link.href} href={link.href} className={styles.navLink}>
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
+        {/* Social Links */}
+        <div className={styles.socialRow}>
+          {socialLinks.map((link) => (
+            <a
+              key={link.platform}
+              href={link.active ? link.url : '#contact-placeholder'}
+              className={styles.socialLink}
+              title={link.platform}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                if (!link.active) {
+                  e.preventDefault();
+                  window.location.href = '/contact';
+                }
+              }}
+            >
+              <span className={styles.socialIcon}>{link.icon}</span>
+              <span className={styles.socialLabel}>{link.platform}</span>
+            </a>
+          ))}
+        </div>
 
-          <div className={styles.socialSection}>
-            <span className={styles.navTitle}>{language === 'zh' ? '社交' : 'Social'}</span>
-            <div className={styles.socialLinks}>
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                  title={link.label}
-                >
-                  <span>{link.icon}</span>
-                  <span className={styles.socialLabel}>{link.label}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+        {/* Info */}
+        <div className={styles.info}>
+          <p className={styles.brand}>
+            <span className={styles.star}>⭐</span>
+            <span className={styles.brandName}>{siteConfig.name}</span>
+          </p>
+          <p className={styles.copyright}>
+            © {new Date().getFullYear()} {siteConfig.author}. {isZh ? '用代码书写星辰' : 'Written in the stars with code'}.
+          </p>
+          <p className={styles.builtWith}>
+            {isZh ? '使用 ' : 'Built with '}
+            <span className={styles.tech}>Next.js</span>
+            <span className={styles.dot}>·</span>
+            <span className={styles.tech}>TypeScript</span>
+            <span className={styles.dot}>·</span>
+            <span className={styles.tech}>Three.js</span>
+            <span className={styles.dot}>·</span>
+            <span className={styles.tech}>Framer Motion</span>
+          </p>
+        </div>
 
-        <motion.div
-          className={styles.bottom}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className={styles.divider} />
-          <div className={styles.copyright}>
-            <span className={styles.year}>2024 - {new Date().getFullYear()}</span>
-            <span className={styles.separator}>·</span>
-            <span className={styles.name}>badhope</span>
-            <span className={styles.separator}>·</span>
-            <span className={styles.location}>深圳 · 广东 · 中国</span>
-          </div>
-          <div className={styles.build}>
-            <span className={styles.buildLabel}>{t.footer.builtWith}</span>
-            <span className={styles.buildTech}>Next.js · TypeScript · Framer Motion</span>
-          </div>
-        </motion.div>
+        {/* Visitor Counter */}
+        <div className={styles.visitor}>
+          <span className={styles.visitorIcon}>👁</span>
+          <span className={styles.visitorText}>
+            {isZh ? '星际访客 #' : 'Star Visitor #'}
+          </span>
+          <VisitorCounter />
+        </div>
       </div>
     </footer>
   );
 }
+
+function VisitorCounter() {
+  const [count, setCount] = useState('---');
+
+  useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const res = await fetch('https://api.counterapi.dev/v1/badhope-starbase/visits/up');
+        if (res.ok) {
+          const data = await res.json();
+          setCount(data.count?.toString() || '---');
+        }
+      } catch {
+        setCount('∞');
+      }
+    };
+    fetchCount();
+  }, []);
+
+  return <span className={styles.count}>{count}</span>;
+}
+
+import { useState, useEffect } from 'react';

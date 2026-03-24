@@ -1,273 +1,158 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import Navigation from '@/components/ui/Navigation';
-import Footer from '@/components/sections/Footer';
-import Comments from '@/components/ui/Comments';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
-import styles from './page.module.css';
+import StarNavigation from '@/components/ui/StarNavigation';
+import styles from './blog.module.css';
 
-const categoryData = [
-  { name: 'Python', value: 35, color: '#00d4ff' },
-  { name: 'Web开发', value: 28, color: '#bf5af2' },
-  { name: 'AI/ML', value: 20, color: '#ff375f' },
-  { name: '工具', value: 12, color: '#30d158' },
-  { name: '其他', value: 5, color: '#ff9500' },
-];
-
-const monthlyViewsEn = [
-  { month: 'Jan', views: 8500 },
-  { month: 'Feb', views: 12000 },
-  { month: 'Mar', views: 9800 },
-  { month: 'Apr', views: 15000 },
-  { month: 'May', views: 18500 },
-  { month: 'Jun', views: 22000 },
-];
-
-const monthlyViewsZh = [
-  { month: '1月', views: 8500 },
-  { month: '2月', views: 12000 },
-  { month: '3月', views: 9800 },
-  { month: '4月', views: 15000 },
-  { month: '5月', views: 18500 },
-  { month: '6月', views: 22000 },
-];
-
-const platformStats = [
-  { platform: 'CSDN', articles: 45, views: 125000, likes: 3200, icon: '📚', url: 'https://blog.csdn.net/weixin_56622231' },
-  { platform: 'Juejin', articles: 38, views: 89000, likes: 2100, icon: '💎', url: 'https://juejin.cn/user/2350111542479753' },
-];
+interface BlogPost {
+  title: string;
+  url: string;
+  source: string;
+  date?: string;
+  description?: string;
+  author?: string;
+}
 
 export default function BlogPage() {
-  const { t, language } = useLanguage();
-  const [mounted, setMounted] = useState(false);
+  const { language } = useLanguage();
+  const isZh = language === 'zh';
+  const [activeTab, setActiveTab] = useState<'csdn' | 'juejin' | 'analytics'>('csdn');
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // Blog links - direct to user's profiles since RSS may have CORS issues
+  const blogSources = [
+    {
+      id: 'csdn' as const,
+      name: 'CSDN',
+      icon: '📚',
+      url: 'https://blog.csdn.net/weixin_56622231',
+      color: '#fc5531',
+    },
+    {
+      id: 'juejin' as const,
+      name: isZh ? '掘金' : 'Juejin',
+      icon: '💎',
+      url: 'https://juejin.cn/user/235011154247',
+      color: '#1e80ff',
+    },
+  ];
 
-  if (!mounted) {
-    return (
-      <div className={styles.page}>
-        <Navigation />
-        <main className={styles.main}>
-          <div className={styles.loading}>Loading...</div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-
-  const blog = t.blog;
-  const monthlyViews = language === 'zh' ? monthlyViewsZh : monthlyViewsEn;
-  const categoryDataLocalized = language === 'zh'
-    ? categoryData
-    : [
-        { name: 'Python', value: 35, color: '#00d4ff' },
-        { name: 'Web Dev', value: 28, color: '#bf5af2' },
-        { name: 'AI/ML', value: 20, color: '#ff375f' },
-        { name: 'Tools', value: 12, color: '#30d158' },
-        { name: 'Other', value: 5, color: '#ff9500' },
-      ];
+  // Sample blog posts for display (will be replaced by real data from build script)
+  const samplePosts: BlogPost[] = [
+    { title: isZh ? 'Next.js 15 新特性解析' : 'Next.js 15 New Features', url: 'https://blog.csdn.net/weixin_56622231', source: 'CSDN', description: isZh ? '深入分析 Next.js 15 的最新特性和改进' : 'Deep dive into Next.js 15 latest features' },
+    { title: isZh ? 'TypeScript 高级类型技巧' : 'Advanced TypeScript Type Tricks', url: 'https://blog.csdn.net/weixin_56622231', source: 'CSDN', description: isZh ? '掌握 TypeScript 的高级类型系统' : 'Master TypeScript advanced type system' },
+    { title: isZh ? 'React 性能优化实战' : 'React Performance Optimization', url: 'https://juejin.cn/user/235011154247', source: isZh ? '掘金' : 'Juejin', description: isZh ? 'React 应用性能优化的实用技巧' : 'Practical React performance tips' },
+    { title: isZh ? 'Docker 容器化部署指南' : 'Docker Containerization Guide', url: 'https://juejin.cn/user/235011154247', source: isZh ? '掘金' : 'Juejin', description: isZh ? '从零开始的 Docker 部署教程' : 'Docker deployment tutorial from scratch' },
+    { title: isZh ? 'AI 大模型接入实践' : 'AI LLM Integration Practice', url: 'https://blog.csdn.net/weixin_56622231', source: 'CSDN', description: isZh ? '如何将大语言模型接入你的应用' : 'How to integrate LLMs into your app' },
+    { title: isZh ? 'Three.js 3D 可视化入门' : 'Three.js 3D Visualization Intro', url: 'https://blog.csdn.net/weixin_56622231', source: 'CSDN', description: isZh ? '使用 Three.js 创建炫酷的 3D 效果' : 'Create cool 3D effects with Three.js' },
+  ];
 
   return (
     <div className={styles.page}>
-      <Navigation />
+      <StarNavigation />
 
       <main className={styles.main}>
-        <section className={styles.hero}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className={styles.label}>{blog.label}</span>
-            <h1 className={styles.title}>
-              <span className="gradient-text">{blog.title.split('').slice(0, 2).join('')}</span>{blog.title.split('').slice(2).join('')}
-            </h1>
-            <p className={styles.subtitle}>{blog.subtitle}</p>
-          </motion.div>
-        </section>
+        <motion.div
+          className={styles.header}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <span className={styles.tag}>{isZh ? '// 博客' : '// Blog'}</span>
+          <h1 className={styles.title}>{isZh ? '星际日志' : 'Stellar Logs'}</h1>
+          <p className={styles.subtitle}>
+            {isZh ? '记录技术探索的每一步' : 'Documenting every step of tech exploration'}
+          </p>
+        </motion.div>
 
-        <section className={styles.stats}>
-          <div className={styles.container}>
-            <div className={styles.statsGrid}>
-              {platformStats.map((stat, i) => (
-                <motion.a
-                  key={stat.platform}
-                  href={stat.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.platformCard}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  whileHover={{ scale: 1.02, borderColor: 'rgba(0, 212, 255, 0.5)' }}
-                >
-                  <div className={styles.platformHeader}>
-                    <span className={styles.platformName}>{stat.platform === 'CSDN' ? (language === 'zh' ? 'CSDN' : 'CSDN') : (language === 'zh' ? '掘金' : 'Juejin')}</span>
-                    <span className={styles.platformIcon}>{stat.icon}</span>
-                  </div>
-                  <div className={styles.platformStats}>
-                    <div className={styles.statItem}>
-                      <span className={styles.statValue}>{stat.articles}</span>
-                      <span className={styles.statLabel}>{blog.platformStats.articles}</span>
-                    </div>
-                    <div className={styles.statItem}>
-                      <span className={styles.statValue}>{(stat.views / 1000).toFixed(1)}k</span>
-                      <span className={styles.statLabel}>{blog.platformStats.views}</span>
-                    </div>
-                    <div className={styles.statItem}>
-                      <span className={styles.statValue}>{(stat.likes / 1000).toFixed(1)}k</span>
-                      <span className={styles.statLabel}>{blog.platformStats.likes}</span>
-                    </div>
-                  </div>
-                  <div className={styles.platformLink}>
-                    {blog.visitProfile} →
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Blog Platform Links */}
+        <motion.div
+          className={styles.platforms}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          {blogSources.map(source => (
+            <a
+              key={source.id}
+              href={source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.platformCard}
+              style={{ '--accent': source.color } as React.CSSProperties}
+            >
+              <span className={styles.platformIcon}>{source.icon}</span>
+              <div>
+                <h3 className={styles.platformName}>{source.name}</h3>
+                <p className={styles.platformUrl}>{source.url.replace('https://', '')}</p>
+              </div>
+              <span className={styles.platformArrow}>→</span>
+            </a>
+          ))}
+        </motion.div>
 
-        <section className={styles.charts}>
-          <div className={styles.container}>
-            <div className={styles.chartsGrid}>
-              <motion.div
-                className={styles.chartCard}
+        {/* Recent Posts */}
+        <motion.div
+          className={styles.postsSection}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <h2 className={styles.sectionTitle}>
+            {isZh ? '📝 最新文章' : '📝 Latest Posts'}
+          </h2>
+          <div className={styles.postsGrid}>
+            {samplePosts.map((post, index) => (
+              <motion.a
+                key={index}
+                href={post.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.postCard}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 * index }}
+                whileHover={{ y: -4 }}
               >
-                <h3 className={styles.chartTitle}>{blog.monthlyViews}</h3>
-                <div className={styles.chartContainer}>
-                  <ResponsiveContainer width="100%" height={250}>
-                    <BarChart data={monthlyViews}>
-                      <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#666', fontSize: 12 }} />
-                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#666', fontSize: 12 }} />
-                      <Tooltip
-                        contentStyle={{
-                          background: '#12121a',
-                          border: '1px solid rgba(255,255,255,0.1)',
-                          borderRadius: '8px',
-                          color: '#e0e0e0',
-                        }}
-                      />
-                      <Bar dataKey="views" fill="url(#gradient)" radius={[4, 4, 0, 0]} />
-                      <defs>
-                        <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#00d4ff" />
-                          <stop offset="100%" stopColor="#bf5af2" />
-                        </linearGradient>
-                      </defs>
-                    </BarChart>
-                  </ResponsiveContainer>
+                <div className={styles.postMeta}>
+                  <span className={styles.postSource}>{post.source}</span>
                 </div>
-              </motion.div>
+                <h3 className={styles.postTitle}>{post.title}</h3>
+                <p className={styles.postDesc}>{post.description}</p>
+                <span className={styles.postLink}>
+                  {isZh ? '阅读全文 →' : 'Read More →'}
+                </span>
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
 
-              <motion.div
-                className={styles.chartCard}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <h3 className={styles.chartTitle}>{blog.categoryDistribution}</h3>
-                <div className={styles.chartContainer}>
-                  <ResponsiveContainer width="100%" height={250}>
-                    <PieChart>
-                      <Pie
-                        data={categoryDataLocalized}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={50}
-                        outerRadius={80}
-                        paddingAngle={5}
-                        dataKey="value"
-                      >
-                        {categoryDataLocalized.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip
-                        contentStyle={{
-                          background: '#12121a',
-                          border: '1px solid rgba(255,255,255,0.1)',
-                          borderRadius: '8px',
-                          color: '#e0e0e0',
-                        }}
-                      />
-                    </PieChart>
-                  </ResponsiveContainer>
-                  <div className={styles.pieLegend}>
-                    {categoryDataLocalized.map((item) => (
-                      <div key={item.name} className={styles.legendItem}>
-                        <span className={styles.legendDot} style={{ background: item.color }} />
-                        <span className={styles.legendLabel}>{item.name}</span>
-                        <span className={styles.legendValue}>{item.value}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+        {/* Analytics Section */}
+        <motion.div
+          className={styles.analyticsSection}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <h2 className={styles.sectionTitle}>
+            {isZh ? '📊 博客数据' : '📊 Blog Analytics'}
+          </h2>
+          <div className={styles.analyticsGrid}>
+            <div className={styles.analyticsCard}>
+              <span className={styles.analyticsValue}>2</span>
+              <span className={styles.analyticsLabel}>{isZh ? '博客平台' : 'Platforms'}</span>
+            </div>
+            <div className={styles.analyticsCard}>
+              <span className={styles.analyticsValue}>∞</span>
+              <span className={styles.analyticsLabel}>{isZh ? '持续更新中' : 'Continuously updating'}</span>
+            </div>
+            <div className={styles.analyticsCard}>
+              <span className={styles.analyticsValue}>⭐</span>
+              <span className={styles.analyticsLabel}>{isZh ? '技术探索' : 'Tech Exploration'}</span>
             </div>
           </div>
-        </section>
-
-        <section className={styles.articles}>
-          <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>
-              <span className="gradient-text">{blog.featured}</span> {blog.articles}
-            </h2>
-            <div className={styles.articlesGrid}>
-              {blog.articlesData.map((article, i) => (
-                <motion.a
-                  key={i}
-                  href={article.platform === 'CSDN' ? 'https://blog.csdn.net/weixin_56622231' : 'https://juejin.cn/user/2350111542479753'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.articleCard}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  whileHover={{ y: -5, borderColor: 'rgba(0, 212, 255, 0.5)' }}
-                >
-                  <div className={styles.articleHeader}>
-                    <span className={styles.articlePlatform}>
-                      {article.platform === 'CSDN' ? `📚 ${language === 'zh' ? 'CSDN' : 'CSDN'}` : `💎 ${language === 'zh' ? '掘金' : 'Juejin'}`}
-                    </span>
-                    <span className={styles.articleDate}>{article.date}</span>
-                  </div>
-                  <h3 className={styles.articleTitle}>{article.title}</h3>
-                  <div className={styles.articleStats}>
-                    <span>👁 {article.views}</span>
-                    <span>❤️ {article.likes}</span>
-                  </div>
-                  <div className={styles.articleTags}>
-                    {article.tags.map((tag) => (
-                      <span key={tag} className={styles.articleTag}>{tag}</span>
-                    ))}
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.commentsSection}>
-          <div className={styles.container}>
-            <Comments />
-          </div>
-        </section>
+        </motion.div>
       </main>
-
-      <Footer />
     </div>
   );
 }

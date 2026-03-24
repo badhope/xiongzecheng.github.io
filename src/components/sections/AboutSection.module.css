@@ -1,0 +1,238 @@
+.section {
+  padding: 160px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.sectionTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #d4af37;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 0 auto;
+}
+
+/* Bio */
+.bio {
+  margin-bottom: 80px;
+}
+
+.bioCard {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 32px;
+  background: rgba(10, 17, 40, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+}
+
+.bioIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+}
+
+.bioText {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Timeline */
+.timeline {
+  margin-bottom: 80px;
+}
+
+.timelineTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #e8e8f0;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.timelineItems {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timelineItems::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1));
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -40px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-bg-deep, #020510);
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  z-index: 1;
+}
+
+.dotActive {
+  background: #d4af37;
+  border-color: #ffd700;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.5); }
+  50% { box-shadow: 0 0 24px rgba(212, 175, 55, 0.8); }
+}
+
+.timelineYear {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #d4af37;
+  min-width: 40px;
+  padding-top: 2px;
+}
+
+.timelineContent h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e8e8f0;
+  margin-bottom: 4px;
+}
+
+.timelineContent p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+}
+
+.timelineOngoing .timelineContent h4 {
+  color: #ffd700;
+}
+
+/* Skills */
+.skillsTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #e8e8f0;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.skillCard {
+  padding: 24px;
+  background: rgba(10, 17, 40, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+
+.skillCard:hover {
+  background: rgba(10, 17, 40, 0.8);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.skillCategory {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #d4af37;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skillTag {
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s;
+}
+
+.skillTag:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.2);
+  color: #d4af37;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 100px 0;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .bioCard {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}

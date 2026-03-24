@@ -8,19 +8,40 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#0a0a0f',
-        foreground: '#e0e0e0',
-        neon: {
-          cyan: '#00d4ff',
-          purple: '#bf5af2',
-          pink: '#ff375f',
-          green: '#30d158',
-          orange: '#ff9500',
+        background: '#020510',
+        foreground: '#e8e8f0',
+        gold: {
+          DEFAULT: '#d4af37',
+          light: '#ffd700',
+          dark: '#b8960c',
+          glow: 'rgba(212, 175, 55, 0.3)',
+        },
+        cosmic: {
+          blue: '#1a73e8',
+          purple: '#7c3aed',
+          cyan: '#06b6d4',
+          pink: '#ec4899',
+          teal: '#14b8a6',
+        },
+        space: {
+          deep: '#020510',
+          primary: '#050a1a',
+          secondary: '#0a1128',
+          tertiary: '#0f1a3a',
         },
       },
       fontFamily: {
-        space: ['Space Grotesk', 'sans-serif'],
+        display: ['Orbitron', 'sans-serif'],
+        heading: ['Space Grotesk', 'sans-serif'],
+        body: ['Space Grotesk', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+        terminal: ['Share Tech Mono', 'monospace'],
+      },
+      animation: {
+        'float': 'float 3s ease-in-out infinite',
+        'pulse-gold': 'pulse-gold 2s ease-in-out infinite',
+        'twinkle': 'twinkle 2s ease-in-out infinite',
+        'shimmer': 'shimmer 3s linear infinite',
       },
     },
   },
