@@ -45,10 +45,7 @@ export default function ToolsPage() {
 
   const filteredTools = activeCategory === 'all'
     ? tools.tools
-    : tools.tools.filter((_, i) => {
-        const originalCategories = ['editor', 'design', 'devops', 'deploy', 'devops', 'other'];
-        return originalCategories[i] === activeCategory;
-      });
+    : tools.tools.filter((tool) => tool.category === activeCategory);
 
   return (
     <main className={styles.main}>

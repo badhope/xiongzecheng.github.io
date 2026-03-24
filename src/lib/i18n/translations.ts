@@ -105,6 +105,7 @@ export interface ToolsTranslations {
     name: string;
     description: string;
     url: string;
+    category: string;
   }[];
 }
 
@@ -401,14 +402,14 @@ export const en: Translations = {
       other: 'Other',
     },
     tools: [
-      { name: 'VS Code', description: 'The best code editor for web development', url: 'https://code.visualstudio.com/' },
-      { name: 'Figma', description: 'Collaborative design and prototyping', url: 'https://figma.com/' },
-      { name: 'GitHub', description: 'Code hosting and version control', url: 'https://github.com/' },
-      { name: 'Vercel', description: 'Fast and easy deployments', url: 'https://vercel.com/' },
-      { name: 'Docker', description: 'Container platform for developers', url: 'https://docker.com/' },
-      { name: 'Postman', description: 'API testing and development', url: 'https://postman.com/' },
-      { name: 'Notion', description: 'All-in-one workspace for notes', url: 'https://notion.so/' },
-      { name: 'Linear', description: 'Issue tracking for software teams', url: 'https://linear.app/' },
+      { name: 'VS Code', description: 'The best code editor for web development', url: 'https://code.visualstudio.com/', category: 'editor' },
+      { name: 'Figma', description: 'Collaborative design and prototyping', url: 'https://figma.com/', category: 'design' },
+      { name: 'GitHub', description: 'Code hosting and version control', url: 'https://github.com/', category: 'devops' },
+      { name: 'Vercel', description: 'Fast and easy deployments', url: 'https://vercel.com/', category: 'deploy' },
+      { name: 'Docker', description: 'Container platform for developers', url: 'https://docker.com/', category: 'devops' },
+      { name: 'Postman', description: 'API testing and development', url: 'https://postman.com/', category: 'editor' },
+      { name: 'Notion', description: 'All-in-one workspace for notes', url: 'https://notion.so/', category: 'other' },
+      { name: 'Linear', description: 'Issue tracking for software teams', url: 'https://linear.app/', category: 'other' },
     ],
   },
   resume: {
@@ -693,14 +694,14 @@ export const zh: Translations = {
       other: '其他',
     },
     tools: [
-      { name: 'VS Code', description: '最佳的Web开发代码编辑器', url: 'https://code.visualstudio.com/' },
-      { name: 'Figma', description: '协作设计和原型制作', url: 'https://figma.com/' },
-      { name: 'GitHub', description: '代码托管和版本控制', url: 'https://github.com/' },
-      { name: 'Vercel', description: '快速简单的部署平台', url: 'https://vercel.com/' },
-      { name: 'Docker', description: '开发者容器平台', url: 'https://docker.com/' },
-      { name: 'Postman', description: 'API测试和开发工具', url: 'https://postman.com/' },
-      { name: 'Notion', description: '多功能笔记工作空间', url: 'https://notion.so/' },
-      { name: 'Linear', description: '软件团队问题追踪', url: 'https://linear.app/' },
+      { name: 'VS Code', description: '最佳的Web开发代码编辑器', url: 'https://code.visualstudio.com/', category: 'editor' },
+      { name: 'Figma', description: '协作设计和原型制作', url: 'https://figma.com/', category: 'design' },
+      { name: 'GitHub', description: '代码托管和版本控制', url: 'https://github.com/', category: 'devops' },
+      { name: 'Vercel', description: '快速简单的部署平台', url: 'https://vercel.com/', category: 'deploy' },
+      { name: 'Docker', description: '开发者容器平台', url: 'https://docker.com/', category: 'devops' },
+      { name: 'Postman', description: 'API测试和开发工具', url: 'https://postman.com/', category: 'editor' },
+      { name: 'Notion', description: '多功能笔记工作空间', url: 'https://notion.so/', category: 'other' },
+      { name: 'Linear', description: '软件团队问题追踪', url: 'https://linear.app/', category: 'other' },
     ],
   },
   resume: {
