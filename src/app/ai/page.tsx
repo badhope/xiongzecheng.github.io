@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import StarNavigation from '@/components/ui/StarNavigation';
+import CosmicParticleBackground from '@/components/effects/CosmicParticleBackground';
 import { generateResponse, getSuggestedQuestions } from '@/lib/ai/response-engine';
 import { getActiveModel, AI_MODELS } from '@/config/ai';
 import styles from './page.module.css';
@@ -130,6 +131,7 @@ export default function AIPage() {
 
   return (
     <div className={styles.page}>
+      <CosmicParticleBackground preset="nebula" intensity="medium" />
       <StarNavigation />
       <div className={styles.container}>
         {/* Header */}

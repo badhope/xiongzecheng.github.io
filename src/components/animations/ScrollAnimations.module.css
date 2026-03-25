@@ -1,0 +1,136 @@
+.starsContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background: #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(212, 175, 55, 0.5);
+}
+
+.scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform-origin: left;
+  z-index: 9999;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timelineLine {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(212, 175, 55, 0.3) 10%,
+    rgba(212, 175, 55, 0.3) 90%,
+    transparent
+  );
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -33px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  background: #020510;
+  border: 2px solid #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.timelineContent {
+  background: rgba(5, 8, 24, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover .timelineContent {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.timelineItem:hover .timelineDot {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.timelineDate {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #d4af37;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.timelineTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e8e8f0;
+  margin: 0 0 8px;
+}
+
+.timelineDesc {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  color: #a0a0b8;
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 30px;
+  }
+
+  .timelineLine {
+    left: 10px;
+  }
+
+  .timelineDot {
+    left: -23px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .timelineContent {
+    padding: 16px;
+  }
+
+  .timelineTitle {
+    font-size: 1rem;
+  }
+
+  .timelineDesc {
+    font-size: 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star {
+    animation: none;
+  }
+}

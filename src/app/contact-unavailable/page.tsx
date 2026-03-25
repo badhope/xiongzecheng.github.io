@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import StarNavigation from '@/components/ui/StarNavigation';
+import CosmicParticleBackground from '@/components/effects/CosmicParticleBackground';
 import styles from './page.module.css';
 
 function ContactUnavailableContent() {
@@ -25,6 +26,7 @@ function ContactUnavailableContent() {
 
   return (
     <div className={styles.page}>
+      <CosmicParticleBackground preset="comets" intensity="medium" />
       <StarNavigation />
       <div className={styles.container}>
         <motion.div

@@ -9,10 +9,9 @@
   margin: 0 auto;
 }
 
-/* Header */
 .header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: var(--header-margin-bottom, 56px);
 }
 
 .headerTag {
@@ -32,7 +31,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .headerDesc {
@@ -41,11 +40,10 @@
   color: #a0a0b8;
 }
 
-/* Search */
 .searchContainer {
   position: relative;
   max-width: 500px;
-  margin: 0 auto 40px;
+  margin: 0 auto var(--section-margin-bottom, 48px);
 }
 
 .searchIcon {
@@ -58,7 +56,7 @@
 
 .searchInput {
   width: 100%;
-  padding: 14px 40px 14px 44px;
+  padding: 16px 44px 16px 48px;
   background: rgba(10, 14, 39, 0.6);
   border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 10px;
@@ -80,7 +78,7 @@
 
 .searchClear {
   position: absolute;
-  right: 12px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -91,11 +89,10 @@
   padding: 4px;
 }
 
-/* Categories */
 .categories {
   display: flex;
-  gap: 8px;
-  margin-bottom: 40px;
+  gap: 12px;
+  margin-bottom: var(--section-margin-bottom, 48px);
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -104,7 +101,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.8rem;
   color: #a0a0b8;
-  padding: 8px 16px;
+  padding: 10px 20px;
   background: rgba(10, 14, 39, 0.6);
   border: 1px solid rgba(212, 175, 55, 0.1);
   border-radius: 20px;
@@ -124,14 +121,12 @@
   color: #d4af37;
 }
 
-/* Tools grid */
 .toolsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  gap: var(--card-gap, 24px);
 }
 
-/* Tool card */
 .toolCard {
   background: rgba(10, 14, 39, 0.5);
   border: 1px solid rgba(212, 175, 55, 0.08);
@@ -144,8 +139,8 @@
 .toolHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
+  gap: 16px;
+  padding: 20px 24px;
 }
 
 .toolIcon {
@@ -165,7 +160,7 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: #e8e8f0;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .toolDesc {
@@ -183,24 +178,23 @@
   flex-shrink: 0;
 }
 
-/* Expanded */
 .toolExpanded {
-  padding: 0 20px 16px;
+  padding: 0 24px 20px;
   overflow: hidden;
 }
 
 .toolTags {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .toolTag {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.65rem;
   color: #a0a0b8;
-  padding: 3px 8px;
+  padding: 4px 10px;
   background: rgba(212, 175, 55, 0.06);
   border-radius: 4px;
 }
@@ -211,7 +205,7 @@
   font-size: 0.85rem;
   color: #d4af37;
   text-decoration: none;
-  padding: 6px 14px;
+  padding: 8px 18px;
   background: rgba(212, 175, 55, 0.08);
   border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 6px;

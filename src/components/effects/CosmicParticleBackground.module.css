@@ -1,0 +1,48 @@
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.staticOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradientOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(26, 115, 232, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canvas {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .gradientOverlay {
+    background: 
+      radial-gradient(ellipse at 30% 30%, rgba(26, 115, 232, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 70%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+  }
+}

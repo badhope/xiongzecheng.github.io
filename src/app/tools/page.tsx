@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import StarNavigation from '@/components/ui/StarNavigation';
+import CosmicParticleBackground from '@/components/effects/CosmicParticleBackground';
 import { TOOL_CATEGORIES, searchTools } from '@/config/tools';
 import styles from './page.module.css';
 
@@ -29,6 +30,7 @@ export default function ToolsPage() {
 
   return (
     <div className={styles.page}>
+      <CosmicParticleBackground preset="matrix" intensity="medium" />
       <StarNavigation />
       <div className={styles.container}>
         {/* Header */}

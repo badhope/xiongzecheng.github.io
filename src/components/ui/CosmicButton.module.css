@@ -1,0 +1,267 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.5);
+  outline-offset: 2px;
+}
+
+.button.fullWidth {
+  width: 100%;
+}
+
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button.loading {
+  cursor: wait;
+}
+
+.text {
+  position: relative;
+  z-index: 2;
+}
+
+.icon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.spinner {
+  position: relative;
+  z-index: 2;
+  font-size: 1em;
+}
+
+.ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.primary {
+  background: linear-gradient(135deg, #d4af37 0%, #f0d060 50%, #d4af37 100%);
+  color: #020510;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.primary:hover:not(.disabled):not(.loading) {
+  background: linear-gradient(135deg, #e0bc45 0%, #f5d870 50%, #e0bc45 100%);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.secondary {
+  background: rgba(10, 14, 39, 0.8);
+  color: #d4af37;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.secondary:hover:not(.disabled):not(.loading) {
+  background: rgba(20, 28, 78, 0.8);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.ghost {
+  background: transparent;
+  color: #d4af37;
+  border: 1px solid transparent;
+}
+
+.ghost:hover:not(.disabled):not(.loading) {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+.cosmic {
+  background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(20, 28, 78, 0.9) 100%);
+  color: #e8e8f0;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  position: relative;
+}
+
+.cosmic:hover:not(.disabled):not(.loading) {
+  border-color: rgba(212, 175, 55, 0.5);
+  color: #d4af37;
+}
+
+.cosmicGlow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #d4af37;
+  border-radius: 50%;
+  animation: twinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+.sm {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+.md {
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+}
+
+.lg {
+  padding: 16px 32px;
+  font-size: 1.05rem;
+  border-radius: 12px;
+}
+
+.cosmicLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #d4af37;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.cosmicLink:hover {
+  color: #f0d060;
+}
+
+.linkText {
+  position: relative;
+}
+
+.linkArrow {
+  font-size: 0.9em;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cosmicLink.underline {
+  position: relative;
+}
+
+.linkUnderline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #d4af37 0%, transparent 100%);
+  transform-origin: left;
+}
+
+.cosmicCard {
+  position: relative;
+  background: rgba(5, 8, 24, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  overflow: hidden;
+}
+
+.cosmicCard.hoverable {
+  cursor: pointer;
+}
+
+.cosmicCard.hoverable:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(212, 175, 55, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.cardGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(212, 175, 55, 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .sm {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+
+  .md {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .lg {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+
+  .cosmicCard {
+    padding: 16px;
+    border-radius: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .cosmicLink,
+  .cosmicCard {
+    transition: none;
+  }
+
+  .ripple {
+    display: none;
+  }
+
+  .star {
+    animation: none;
+  }
+}

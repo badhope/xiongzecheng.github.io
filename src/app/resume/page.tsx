@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import StarNavigation from '@/components/ui/StarNavigation';
+import CosmicParticleBackground from '@/components/effects/CosmicParticleBackground';
 import styles from './page.module.css';
 
 const experience = [
@@ -40,6 +41,7 @@ export default function ResumePage() {
 
   return (
     <div className={styles.page}>
+      <CosmicParticleBackground preset="starfield" intensity="medium" />
       <StarNavigation />
       <div className={styles.container}>
         {/* Header */}

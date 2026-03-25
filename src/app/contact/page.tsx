@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import StarNavigation from '@/components/ui/StarNavigation';
+import CosmicParticleBackground from '@/components/effects/CosmicParticleBackground';
 import { SOCIAL_LINKS } from '@/config/social';
 import styles from './page.module.css';
 
@@ -41,6 +42,7 @@ export default function ContactPage() {
 
   return (
     <div className={styles.page}>
+      <CosmicParticleBackground preset="fireflies" intensity="medium" />
       <StarNavigation />
       <div className={styles.container}>
         {/* Header */}

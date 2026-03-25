@@ -9,10 +9,9 @@
   margin: 0 auto;
 }
 
-/* Header */
 .header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: var(--header-margin-bottom, 56px);
 }
 
 .headerTag {
@@ -32,7 +31,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .headerDesc {
@@ -44,32 +43,30 @@
   line-height: 1.6;
 }
 
-/* Content */
 .content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 72px;
 }
 
-/* Form section */
 .sectionTitle {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   color: #e8e8f0;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .label {
@@ -84,7 +81,7 @@
 
 .input,
 .textarea {
-  padding: 12px 16px;
+  padding: 14px 18px;
   background: rgba(10, 14, 39, 0.6);
   border: 1px solid rgba(212, 175, 55, 0.12);
   border-radius: 8px;
@@ -112,7 +109,7 @@
 }
 
 .submitBtn {
-  padding: 14px 32px;
+  padding: 16px 36px;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
   border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 8px;
@@ -147,19 +144,18 @@
   color: #ef4444;
 }
 
-/* Social section */
 .socialGrid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 16px;
+  margin-bottom: 36px;
 }
 
 .socialCard {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
+  gap: 16px;
+  padding: 16px 20px;
   background: rgba(10, 14, 39, 0.5);
   border: 1px solid rgba(212, 175, 55, 0.08);
   border-radius: 10px;
@@ -197,9 +193,8 @@
   font-size: 0.9rem;
 }
 
-/* Email */
 .emailSection {
-  padding: 20px;
+  padding: 24px;
   background: rgba(212, 175, 55, 0.04);
   border: 1px solid rgba(212, 175, 55, 0.08);
   border-radius: 10px;
@@ -209,7 +204,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.85rem;
   color: #a0a0b8;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .emailLink {
@@ -235,6 +230,6 @@
 
   .content {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 48px;
   }
 }

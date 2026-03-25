@@ -9,10 +9,9 @@
   margin: 0 auto;
 }
 
-/* Header */
 .header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: var(--header-margin-bottom, 56px);
 }
 
 .headerTag {
@@ -32,7 +31,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .headerDesc {
@@ -41,11 +40,10 @@
   color: #a0a0b8;
 }
 
-/* Tabs */
 .tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 40px;
+  gap: 12px;
+  margin-bottom: var(--section-margin-bottom, 48px);
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -54,7 +52,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.85rem;
   color: #a0a0b8;
-  padding: 10px 20px;
+  padding: 12px 24px;
   background: rgba(10, 14, 39, 0.6);
   border: 1px solid rgba(212, 175, 55, 0.1);
   border-radius: 8px;
@@ -73,12 +71,10 @@
   color: #d4af37;
 }
 
-/* Content */
 .content {
   min-height: 400px;
 }
 
-/* Rankings */
 .rankings {
   background: rgba(10, 14, 39, 0.4);
   border: 1px solid rgba(212, 175, 55, 0.08);
@@ -89,7 +85,7 @@
 .rankHeader {
   display: grid;
   grid-template-columns: 50px 1fr 120px 80px;
-  padding: 12px 20px;
+  padding: 16px 24px;
   background: rgba(212, 175, 55, 0.05);
   border-bottom: 1px solid rgba(212, 175, 55, 0.08);
   font-family: 'JetBrains Mono', monospace;
@@ -102,7 +98,7 @@
 .rankRow {
   display: grid;
   grid-template-columns: 50px 1fr 120px 80px;
-  padding: 14px 20px;
+  padding: 16px 24px;
   border-bottom: 1px solid rgba(212, 175, 55, 0.04);
   transition: all 0.2s ease;
   font-family: 'Space Grotesk', sans-serif;
@@ -144,22 +140,21 @@
 }
 
 .dataSource {
-  padding: 16px 20px;
+  padding: 20px 24px;
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.7rem;
   color: #6b6b80;
   text-align: center;
 }
 
-/* News list */
 .newsList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .newsSection {
-  padding: 24px;
+  padding: var(--card-padding, 28px);
   background: rgba(10, 14, 39, 0.4);
   border: 1px solid rgba(212, 175, 55, 0.08);
   border-radius: 12px;
@@ -170,7 +165,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: #e8e8f0;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .newsLink {
@@ -185,16 +180,15 @@
   color: #f0d060;
 }
 
-/* Trending */
 .trendingList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .trendingItem {
   display: block;
-  padding: 20px;
+  padding: var(--card-padding, 28px);
   background: rgba(10, 14, 39, 0.4);
   border: 1px solid rgba(212, 175, 55, 0.08);
   border-radius: 12px;
@@ -205,8 +199,8 @@
 .trendingHeader {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .trendingIcon {
@@ -237,17 +231,17 @@
 .viewAll {
   display: block;
   text-align: center;
-  padding: 16px;
+  padding: 20px;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
   color: #d4af37;
   text-decoration: none;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .loading {
   text-align: center;
-  padding: 60px;
+  padding: 80px;
 }
 
 .loadingText {
@@ -255,15 +249,14 @@
   color: #6b6b80;
 }
 
-/* Calendar */
 .calendar {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .calendarCard {
-  padding: 24px;
+  padding: var(--card-padding, 28px);
   background: rgba(10, 14, 39, 0.4);
   border: 1px solid rgba(212, 175, 55, 0.08);
   border-radius: 12px;
@@ -274,25 +267,25 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: #e8e8f0;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .calendarDate {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.9rem;
   color: #d4af37;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .calendarEvents {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .event {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: flex-start;
 }
 
@@ -328,16 +321,16 @@
   .rankHeader,
   .rankRow {
     grid-template-columns: 40px 1fr 80px 60px;
-    padding: 10px 12px;
+    padding: 12px 16px;
     font-size: 0.8rem;
   }
 
   .tabs {
-    gap: 6px;
+    gap: 8px;
   }
 
   .tab {
-    padding: 8px 14px;
+    padding: 10px 18px;
     font-size: 0.8rem;
   }
 }

@@ -9,10 +9,9 @@
   margin: 0 auto;
 }
 
-/* Header */
 .header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: var(--header-margin-bottom, 56px);
 }
 
 .headerTag {
@@ -32,14 +31,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .headerSubtitle {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   color: #a0a0b8;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .headerLinks {
@@ -54,7 +53,7 @@
   font-size: 0.8rem;
   color: #d4af37;
   text-decoration: none;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 6px;
   transition: all 0.2s ease;
@@ -64,9 +63,8 @@
   border-color: rgba(212, 175, 55, 0.3);
 }
 
-/* Section */
 .section {
-  margin-bottom: 60px;
+  margin-bottom: var(--section-margin-bottom, 48px);
 }
 
 .sectionTitle {
@@ -74,18 +72,17 @@
   font-size: 1.2rem;
   font-weight: 600;
   color: #e8e8f0;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
   border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
-/* Timeline item */
 .timelineItem {
-  padding: 20px 24px;
+  padding: var(--card-padding, 28px);
   background: rgba(10, 14, 39, 0.5);
   border: 1px solid rgba(212, 175, 55, 0.08);
   border-radius: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .period {
@@ -100,7 +97,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: #e8e8f0;
-  margin: 8px 0;
+  margin: 12px 0;
 }
 
 .itemDesc {
@@ -108,12 +105,12 @@
   font-size: 0.9rem;
   color: #a0a0b8;
   line-height: 1.6;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .tags {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -121,20 +118,19 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
   color: #a0a0b8;
-  padding: 3px 8px;
+  padding: 4px 10px;
   background: rgba(212, 175, 55, 0.06);
   border-radius: 4px;
 }
 
-/* Skill categories */
 .skillCategories {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  gap: var(--card-gap, 24px);
 }
 
 .skillCategory {
-  padding: 20px;
+  padding: var(--card-padding, 28px);
   background: rgba(10, 14, 39, 0.4);
   border: 1px solid rgba(212, 175, 55, 0.08);
   border-radius: 12px;
@@ -145,29 +141,28 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: #d4af37;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .skillList {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .skillItem {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   color: #a0a0b8;
-  padding: 4px 10px;
+  padding: 6px 12px;
   background: rgba(2, 5, 16, 0.4);
   border: 1px solid rgba(212, 175, 55, 0.06);
   border-radius: 6px;
 }
 
-/* Download */
 .download {
   text-align: center;
-  padding: 40px;
+  padding: 48px;
 }
 
 .downloadText {

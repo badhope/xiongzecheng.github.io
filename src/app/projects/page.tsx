@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import StarNavigation from '@/components/ui/StarNavigation';
+import CosmicParticleBackground from '@/components/effects/CosmicParticleBackground';
 import styles from './page.module.css';
 
 interface GitHubRepo {
@@ -66,6 +67,7 @@ export default function ProjectsPage() {
 
   return (
     <div className={styles.page}>
+      <CosmicParticleBackground preset="galaxy" intensity="medium" />
       <StarNavigation />
       <div className={styles.container}>
         {/* Header */}

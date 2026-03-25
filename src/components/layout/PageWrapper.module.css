@@ -1,0 +1,114 @@
+.pageWrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.loadingPlaceholder {
+  position: fixed;
+  inset: 0;
+  background: #020510;
+  z-index: 9999;
+}
+
+.pageContent {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+}
+
+.transitionOverlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, rgba(2, 5, 16, 0.95) 100%);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.starsPattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 40% 70%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 60% 20%, rgba(212, 175, 55, 0.8), transparent),
+    radial-gradient(1px 1px at 80% 60%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 10% 80%, rgba(212, 175, 55, 0.6), transparent),
+    radial-gradient(1px 1px at 90% 40%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 30% 50%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 70% 90%, rgba(212, 175, 55, 0.5), transparent);
+  background-size: 200px 200px;
+  opacity: 0.5;
+}
+
+.section {
+  position: relative;
+  padding: 60px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section.fullWidth {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.contentCard {
+  position: relative;
+  background: rgba(5, 8, 24, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contentCard.hoverable:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(212, 175, 55, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.staggerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.staggerItem {
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 16px;
+  }
+
+  .contentCard {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .staggerContainer {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 32px 12px;
+  }
+
+  .contentCard {
+    padding: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transitionOverlay {
+    display: none;
+  }
+}
