@@ -171,3 +171,11 @@
   font-size: 0.7rem;
   color: #6b6b80;
 }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .snakeGame { max-width: 100% !important; }
+}
+@media (max-width: 480px) {
+  .snakeGame { padding: 8px !important; }
+}

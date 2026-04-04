@@ -272,3 +272,17 @@
   padding: 40px;
   font-family: 'JetBrains Mono', monospace;
 }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+  .statCard { padding: 16px 12px !important; }
+  .statValue { font-size: 1.6rem !important; }
+  .controls { flex-direction: column !important; align-items: flex-start !important; }
+  .repoGrid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  .header { margin-bottom: 24px !important; }
+  .headerTag { font-size: 0.7rem !important; }
+  .container { padding: 0 12px !important; }
+}

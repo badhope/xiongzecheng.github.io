@@ -218,3 +218,14 @@
   font-size: 0.65rem;
   color: #6b6b80;
 }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .statusPanel { max-width: 100% !important; padding: 16px !important; }
+  .time { font-size: 1.5rem !important; }
+}
+@media (max-width: 480px) {
+  .statusPanel { padding: 12px !important; gap: 12px !important; }
+  .time { font-size: 1.2rem !important; letter-spacing: 1px !important; }
+  .funStats { gap: 6px !important; }
+}

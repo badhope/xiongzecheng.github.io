@@ -1,0 +1,26 @@
+// Extended FAQ knowledge base
+export const extendedKB: Array<{id:string;keywords:string[];question:string;answer:string;category:string}> = [
+  {id:"career-003",keywords:["远程","remote","居家办公"],question:"badhope接受远程工作吗？",answer:"是的！作为独立开发者，主要远程工作。可以配合GitHub、Slack、飞书等协作工具。时区在深圳GMT+8。",category:"career"},
+  {id:"career-004",keywords:["如何成为开发者","学编程","入门","转行","零基础"],question:"零基础如何成为开发者？",answer:"路径：①选择方向(Web/数据/AI) ②学Python/JS ③做个人项目 ④发布到GitHub ⑤持续学习。关键：动手做项目比看书重要10倍！",category:"career"},
+  {id:"career-005",keywords:["前端还是后端","全栈"],question:"应该先学前端还是后端？",answer:"更关注界面→先学前端；喜欢数据和逻辑→先学后端。最终都要学！badhope从数据科学转到全栈。",category:"career"},
+  {id:"career-006",keywords:["AI取代程序员","程序员失业"],question:"AI会取代程序员吗？",answer:"AI不会取代程序员，但会取代不会用AI的程序员。Copilot等工具让效率提升10倍。会用AI的程序员=一个人的团队。",category:"career"},
+  {id:"career-007",keywords:["独立开发","solo developer"],question:"独立开发者需要什么能力？",answer:"全栈能力、产品思维、运营意识、自律、持续学习。",category:"career"},
+  {id:"contact-001",keywords:["联系","联系方式","邮箱"],question:"如何联系badhope？",answer:"邮箱x18825407105@outlook.com、GitHub https://github.com/badhope、/contact页面表单直接发消息！",category:"contact"},
+  {id:"contact-002",keywords:["合作","项目合作","外包"],question:"可以和badhope合作项目吗？",answer:"当然可以！访问/contact页面，讨论项目合作、技术咨询、AI应用构建、前后端开发。",category:"contact"},
+  {id:"fun-001",keywords:["你好","hi","hello"],question:"你好",answer:"你好！我是Star，badhope的AI助手。可以问我关于badhope的任何问题，也可以去Fun Zone玩贪吃蛇！",category:"general"},
+  {id:"fun-002",keywords:["你叫什么","你是谁"],question:"你叫什么名字？",answer:"我叫Star，是badhope的AI助手！",category:"general"},
+  {id:"fun-003",keywords:["你是AI吗"],question:"你是AI吗？",answer:"是的！我是Star，基于badhope网站知识库的AI助手。",category:"general"},
+  {id:"fun-004",keywords:["天气"],question:"今天天气怎么样？",answer:"滚动到首页底部的动态状态面板，那里有深圳的实时天气！",category:"general"},
+  {id:"fun-005",keywords:["无聊","游戏"],question:"好无聊有什么好玩的？",answer:"来玩贪吃蛇！首页滚动到Fun Zone，点击贪吃蛇卡片开始！",category:"general"},
+  {id:"fun-006",keywords:["加班","996"],question:"badhope加班严重吗？",answer:"独立开发者没有传统加班概念。有灵感时肝到凌晨，有deadline时规律，其他时候看状态~",category:"general"},
+  {id:"fun-007",keywords:["摸鱼","高效工作"],question:"怎么高效工作又摸鱼？",answer:"AI工具自动化重复工作、番茄工作法(25min+5min休息)、早上先搞最难任务。效率就是摸鱼的本钱！",category:"general"},
+  {id:"fun-008",keywords:["睡眠","作息"],question:"badhope作息规律吗？",answer:"有灵感时：肝到凌晨2-3点；没灵感时：10点起床；每天必喝咖啡/茶。",category:"general"},
+  {id:"fun-009",keywords:["音乐","coding音乐"],question:"badhope写代码时听什么音乐？",answer:"常见：Lo-Fi嘻哈(节奏稳定)、古典音乐(专注)、白噪音(沉浸感)。或者有时候安静地写。",category:"general"},
+  {id:"fun-010",keywords:["b站","youtube"],question:"badhope在B站看什么？",answer:"技术教程(新框架)、独立游戏开发(Canvas)、CS课堂(MIT)、科技评测。",category:"general"},
+  {id:"fun-011",keywords:["游戏","steam"],question:"badhope玩游戏吗？",answer:"网站里就藏了贪吃蛇，说明badhope对游戏有爱！或者：工作就是游戏，代码就是我的世界！",category:"general"},
+  {id:"fun-012",keywords:["美食","深圳"],question:"深圳有什么好吃的？",answer:"深圳：东门町(各地小吃)、华强北(便宜美食)、海岸城(商场美食)、南山(高性价比)。badhope专注coding~",category:"general"},
+  {id:"fun-013",keywords:["咖啡","提神"],question:"badhope喝咖啡吗？",answer:"技术人标配！深夜coding，没有caffeine怎么撑得住！",category:"general"},
+  {id:"help-001",keywords:["帮助","你能做什么"],question:"你能做什么？",answer:"我是Star，badhope的AI助手！回答关于badhope的技能、项目、经历、技术建议等问题。可以去Fun Zone玩贪吃蛇、尝试语言切换！",category:"general"},
+  {id:"help-002",keywords:["建议","推荐","学什么"],question:"有什么技术推荐学吗？",answer:"必学：TypeScript、React/Next.js、PostgreSQL+Redis。AI方向：Python+LangChain、RAG、向量数据库。加分类：Docker、CI/CD，云服务(AWS/阿里云)。",category:"general"},
+  {id:"help-003",keywords:["网站崩了","bug","错误"],question:"网站出bug了怎么办？",answer:"强制刷新(Ctrl+Shift+R)、清除浏览器缓存、换浏览器。如果还不行去GitHub提issue：https://github.com/badhope/badhope.github.io/issues",category:"general"}
+];

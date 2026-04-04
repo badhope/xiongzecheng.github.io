@@ -14,3 +14,11 @@
   max-width: 600px;
   background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.15), transparent);
 }
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .divider { max-width: 90%; }
+}
+@media (max-width: 480px) {
+  .divider { max-width: 95%; }
+}
