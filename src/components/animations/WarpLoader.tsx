@@ -200,6 +200,13 @@ export default function WarpLoader({ onComplete }: WarpLoaderProps) {
   // Countdown timer
   useEffect(() => {
     if (phase === 'idle' && showButton) {
+      const handleEnter = () => {
+        if (countdownRef.current) clearInterval(countdownRef.current);
+        setShowButton(false);
+        setPhase('warp');
+        targetSpeedRef.current = 30;
+      };
+
       countdownRef.current = setInterval(() => {
         setCountdown(prev => {
           if (prev <= 1) {

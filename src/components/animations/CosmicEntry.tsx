@@ -148,6 +148,12 @@ export default function CosmicEntry({ onComplete }: CosmicEntryProps) {
   // Countdown
   useEffect(() => {
     if (phase !== 'intro') return;
+
+    const handleStartWarp = () => {
+      setPhase('warp');
+      targetSpeedRef.current = 45;
+    };
+
     const timer = setInterval(() => {
       setCountdown(prev => {
         if (prev <= 1) {

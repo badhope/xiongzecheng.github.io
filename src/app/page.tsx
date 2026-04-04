@@ -1,104 +1,75 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import dynamic from 'next/dynamic';
-import StarNavigation from '@/components/ui/StarNavigation';
-import HeroSection from '@/components/sections/HeroSection';
-import AboutSection from '@/components/sections/AboutSection';
-import DailyQuote from '@/components/sections/DailyQuote';
-import Footer from '@/components/sections/Footer';
-import SettingsPanel from '@/components/settings/SettingsPanel';
-import styles from './home/page.module.css';
-
-const MouseTrail = dynamic(() => import('@/components/animations/MouseTrail'), { ssr: false });
-const CosmicOrbit = dynamic(() => import('@/components/animations/CosmicOrbit'), { ssr: false });
-const GitHubStats = dynamic(() => import('@/components/animations/GitHubStats'), { ssr: false });
-const DynamicStatus = dynamic(() => import('@/components/sections/DynamicStatus'), { ssr: false });
-const FunZone = dynamic(() => import('@/components/sections/FunZone'), { ssr: false });
-
-// ⭐ 穿越星空入场动画 - sessionStorage 防止重复
-const CosmicEntry = dynamic(() => import('@/components/animations/CosmicEntry'), { ssr: false });
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function RootPage() {
-  // 首次访问显示星空入场动画（sessionStorage 记忆，同一会话不重复）
-  const [showEntry, setShowEntry] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return !sessionStorage.getItem('starbase-entered');
-    }
-    return true;
-  });
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const router = useRouter();
 
-  const handleEntryComplete = useCallback(() => {
-    setShowEntry(false);
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('starbase-entered', '1');
-    }
-  }, []);
+  useEffect(() => {
+    router.replace('/home');
+  }, [router]);
 
   return (
-    <div className={styles.container}>
-      {/* ⭐ 穿越星空入场动画 */}
-      {showEntry && <CosmicEntry onComplete={handleEntryComplete} />}
-
-      {/* 全局效果层 */}
-      <MouseTrail />
-      <StarNavigation />
-      <SettingsPanel isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
-
-      <main className={styles.main}>
-        <HeroSection />
-        <div className={styles.divider} />
-
-        <AboutSection />
-        <div className={styles.divider} />
-
-        <CosmicOrbitSection />
-        <div className={styles.divider} />
-
-        <GitHubStats />
-        <div className={styles.divider} />
-
-        <DynamicStatusSection />
-        <div className={styles.divider} />
-
-        <FunZone />
-        <div className={styles.divider} />
-
-        <DailyQuote />
-      </main>
-
-      <Footer />
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #04071a 0%, #070d30 50%, #0c1440 100%)',
+      color: '#d4af37',
+      fontFamily: "'JetBrains Mono', monospace",
+      fontSize: '0.9rem',
+    }}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        style={{ textAlign: 'center' }}
+      >
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 1, type: 'spring' }}
+          style={{ fontSize: '3rem', marginBottom: '24px' }}
+        >
+          ⭐
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          style={{ marginBottom: '8px' }}
+        >
+          badhope&apos;s Starbase
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          style={{ color: '#a0a0b8', fontSize: '0.8rem' }}
+        >
+          Full-Stack Developer & AI Explorer
+        </motion.p>
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: '200px' }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          style={{
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent, #d4af37, transparent)',
+            margin: '24px auto',
+          }}
+        />
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          style={{ color: '#6b6b80' }}
+        >
+          Loading...
+        </motion.p>
+      </motion.div>
     </div>
-  );
-}
-
-function CosmicOrbitSection() {
-  const [visible, setVisible] = useState(false);
-  const ref = (node: HTMLDivElement | null) => {
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
-    observer.observe(node);
-  };
-  return (
-    <section ref={ref} style={{ padding: '60px 24px', textAlign: 'center' }}>
-      <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem', color: '#d4af37', letterSpacing: '1px', marginBottom: '24px' }}>
-        {'// Cosmic Tech Orbit'}
-      </div>
-      {visible && <CosmicOrbit size={360} />}
-    </section>
-  );
-}
-
-function DynamicStatusSection() {
-  return (
-    <section style={{ padding: '40px 24px' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <DynamicStatus />
-      </div>
-    </section>
   );
 }
