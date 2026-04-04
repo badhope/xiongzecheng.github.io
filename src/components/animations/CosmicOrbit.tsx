@@ -1,26 +1,29 @@
 'use client';
 
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import styles from './CosmicOrbit.module.css';
 
 interface Orb {
   angle: number; radius: number; speed: number;
   size: number; color: string; glow: string;
-  label: string; icon: string;
+  labelZh: string; labelEn: string; icon: string;
 }
 
-const ORBIT_ITEMS: Orb[] = [
-  { angle: 0, radius: 100, speed: 0.008, size: 12, color: '#f0d060', glow: '#f0d060', label: 'TypeScript', icon: 'TS' },
-  { angle: 1.2, radius: 140, speed: -0.006, size: 10, color: '#3178c6', glow: '#3178c6', label: 'React', icon: '⚛' },
-  { angle: 2.5, radius: 110, speed: 0.01, size: 8, color: '#06b6d4', glow: '#06b6d4', label: 'Next.js', icon: '▲' },
-  { angle: 3.8, radius: 130, speed: -0.007, size: 9, color: '#7c3aed', glow: '#7c3aed', label: 'Python', icon: '🐍' },
-  { angle: 5.0, radius: 95, speed: 0.012, size: 7, color: '#22c55e', glow: '#22c55e', label: 'Node.js', icon: '⬢' },
-  { angle: 0.8, radius: 150, speed: -0.005, size: 11, color: '#a78bfa', glow: '#a78bfa', label: 'AI / ML', icon: '🤖' },
+const ORBIT_ITEMS = (isZh: boolean): Orb[] => [
+  { angle: 0,    radius: 100, speed: 0.008,  size: 12, color: '#f0d060', glow: '#f0d060', labelZh: 'TypeScript', labelEn: 'TypeScript', icon: 'TS' },
+  { angle: 1.2,  radius: 140, speed: -0.006, size: 10, color: '#3178c6', glow: '#3178c6', labelZh: 'React',       labelEn: 'React',       icon: '⚛' },
+  { angle: 2.5,  radius: 110, speed: 0.01,   size: 8,  color: '#06b6d4', glow: '#06b6d4', labelZh: 'Next.js',     labelEn: 'Next.js',     icon: '▲' },
+  { angle: 3.8,  radius: 130, speed: -0.007, size: 9,  color: '#7c3aed', glow: '#7c3aed', labelZh: 'Python',      labelEn: 'Python',      icon: '🐍' },
+  { angle: 5.0,  radius: 95,  speed: 0.012,  size: 7,  color: '#22c55e', glow: '#22c55e', labelZh: 'Node.js',     labelEn: 'Node.js',     icon: '⬢' },
+  { angle: 0.8,  radius: 150, speed: -0.005, size: 11, color: '#a78bfa', glow: '#a78bfa', labelZh: 'AI / ML',     labelEn: 'AI / ML',     icon: '🤖' },
 ];
 
 export default function CosmicOrbit({ size = 340 }: { size?: number }) {
+  const { language } = useLanguage();
+  const isZh = language === 'zh';
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const orbsRef = useRef(ORBIT_ITEMS.map(item => ({ ...item })));
+  const orbsRef = useRef<Orb[]>(ORBIT_ITEMS(isZh));
   const [hoveredOrb, setHoveredOrb] = useState<Orb | null>(null);
   const rafRef = useRef<number>(0);
 
@@ -81,12 +84,11 @@ export default function CosmicOrbit({ size = 340 }: { size?: number }) {
       const pulse = Math.sin(Date.now() / 500 + orb.angle) * 2;
       const isHovered = hoveredOrb === orb;
       const orbSize = (orb.size + pulse + (isHovered ? 4 : 0)) * scale;
+      const label = isZh ? orb.labelZh : orb.labelEn;
 
-      // Glow
       ctx.shadowColor = orb.glow;
       ctx.shadowBlur = isHovered ? 25 : 15;
 
-      // Gradient orb
       const grd = ctx.createRadialGradient(ox, oy, 0, ox, oy, orbSize);
       grd.addColorStop(0, orb.color);
       grd.addColorStop(1, orb.color + '66');
@@ -95,27 +97,29 @@ export default function CosmicOrbit({ size = 340 }: { size?: number }) {
       ctx.arc(ox, oy, orbSize, 0, Math.PI * 2);
       ctx.fill();
 
-      // Icon/text
       ctx.shadowBlur = 0;
       ctx.fillStyle = '#fff';
-      ctx.font = `${(orbSize * 0.9)}px sans-serif`;
+      ctx.font = `${orbSize * 0.9}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(orb.icon, ox, oy);
 
-      // Label
       if (isHovered || window.innerWidth > 768) {
         ctx.shadowColor = orb.glow;
         ctx.shadowBlur = 8;
         ctx.fillStyle = orb.color;
         ctx.font = `${8 * scale}px JetBrains Mono, monospace`;
-        ctx.fillText(orb.label, ox, oy + orbSize + 10 * scale);
+        ctx.fillText(label, ox, oy + orbSize + 10 * scale);
         ctx.shadowBlur = 0;
       }
     });
 
     rafRef.current = requestAnimationFrame(draw);
-  }, [size, hoveredOrb]);
+  }, [size, hoveredOrb, isZh]);
+
+  useEffect(() => {
+    orbsRef.current = ORBIT_ITEMS(isZh);
+  }, [isZh]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -133,7 +137,7 @@ export default function CosmicOrbit({ size = 340 }: { size?: number }) {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       const mx = e.clientX - rect.left - canvas.width / 2;
-      const my = e.clientY - rect.top - (canvas.height / 2);
+      const my = e.clientY - rect.top - canvas.height / 2;
       const scale = size / 340;
       let closest: Orb | null = null;
       let minDist = 9999;
@@ -155,7 +159,7 @@ export default function CosmicOrbit({ size = 340 }: { size?: number }) {
       cancelAnimationFrame(rafRef.current);
       canvas.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [draw, size]);
+  }, [draw, size, isZh]);
 
   return (
     <div className={styles.wrapper}>

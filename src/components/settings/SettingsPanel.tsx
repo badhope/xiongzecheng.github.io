@@ -11,7 +11,7 @@ interface SettingsPanelProps {
 }
 
 export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const { settings, updateSettings } = useSettings();
   const isZh = language === 'zh';
 
@@ -35,18 +35,46 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
           >
             <div className={styles.header}>
               <h2 className={styles.title}>
-                {isZh ? '设置' : 'Settings'}
+                {isZh ? '⚙️ 设置' : '⚙️ Settings'}
               </h2>
               <button className={styles.closeBtn} onClick={onClose}>✕</button>
             </div>
 
             <div className={styles.content}>
+              {/* Language Switcher */}
+              <div className={styles.settingGroup}>
+                <div className={styles.sectionTitle}>
+                  {isZh ? '🌐 语言' : '🌐 Language'}
+                </div>
+                <div className={styles.languageSwitcher}>
+                  <button
+                    className={`${styles.langBtn} ${language === 'zh' ? styles.langActive : ''}`}
+                    onClick={() => setLanguage('zh')}
+                  >
+                    <span className={styles.langFlag}>🇨🇳</span>
+                    <span className={styles.langLabel}>中文</span>
+                  </button>
+                  <button
+                    className={`${styles.langBtn} ${language === 'en' ? styles.langActive : ''}`}
+                    onClick={() => setLanguage('en')}
+                  >
+                    <span className={styles.langFlag}>🇺🇸</span>
+                    <span className={styles.langLabel}>English</span>
+                  </button>
+                </div>
+                <p className={styles.settingDesc}>
+                  {isZh ? '✓ 当前语言已保存，下次访问自动应用' : '✓ Language preference saved for next visit'}
+                </p>
+              </div>
+
+              <div className={styles.divider} />
+
               {/* Animation toggle */}
               <div className={styles.settingGroup}>
                 <div className={styles.settingRow}>
                   <div className={styles.settingInfo}>
                     <span className={styles.settingLabel}>
-                      {isZh ? '动画效果' : 'Animations'}
+                      ✨ {isZh ? '动画效果' : 'Animations'}
                     </span>
                     <span className={styles.settingDesc}>
                       {isZh ? '开启/关闭页面动画' : 'Enable/disable page animations'}
@@ -67,7 +95,7 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
                 <div className={styles.settingRow}>
                   <div className={styles.settingInfo}>
                     <span className={styles.settingLabel}>
-                      {isZh ? '粒子效果' : 'Particles'}
+                      ✦ {isZh ? '粒子效果' : 'Particles'}
                     </span>
                     <span className={styles.settingDesc}>
                       {isZh ? '开启/关闭背景粒子' : 'Enable/disable background particles'}
@@ -88,7 +116,7 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
                 <div className={styles.settingRow}>
                   <div className={styles.settingInfo}>
                     <span className={styles.settingLabel}>
-                      {isZh ? '音量' : 'Volume'}
+                      🔊 {isZh ? '音量' : 'Volume'}
                     </span>
                     <span className={styles.settingDesc}>
                       {isZh ? '调整背景音乐音量' : 'Adjust background music volume'}
@@ -115,7 +143,7 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
                 <div className={styles.settingRow}>
                   <div className={styles.settingInfo}>
                     <span className={styles.settingLabel}>
-                      {isZh ? '背景音乐' : 'Background Music'}
+                      🎵 {isZh ? '背景音乐' : 'Background Music'}
                     </span>
                     <span className={styles.settingDesc}>
                       {isZh ? '在 src/config/music.ts 中配置音乐URL' : 'Configure music URL in src/config/music.ts'}
@@ -130,10 +158,16 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
               {/* Info */}
               <div className={styles.info}>
                 <p className={styles.infoText}>
-                  {isZh
-                    ? '💡 提示：关闭动画可提升低性能设备的体验'
-                    : '💡 Tip: Disabling animations improves experience on low-performance devices'}
+                  💡 {isZh
+                    ? '提示：关闭动画可提升低性能设备的体验'
+                    : 'Tip: Disabling animations improves experience on low-performance devices'}
                 </p>
+              </div>
+
+              {/* Version */}
+              <div className={styles.version}>
+                <span>badhope&apos;s Starbase</span>
+                <span>v2.0 · 2026</span>
               </div>
             </div>
           </motion.div>

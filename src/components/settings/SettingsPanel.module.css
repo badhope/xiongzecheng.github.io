@@ -1,6 +1,5 @@
 
 
-
 .overlay {
   position: fixed;
   inset: 0;
@@ -67,7 +66,65 @@
 
 .settingGroup {
   padding: 12px 0;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.05);
+}
+
+.sectionTitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #d4af37;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.languageSwitcher {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.langBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(15, 21, 53, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.langBtn:hover {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.langBtn.langActive {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+}
+
+.langFlag { font-size: 1.2rem; }
+
+.langLabel {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #a0a0b8;
+  transition: color 0.2s;
+}
+
+.langBtn.langActive .langLabel { color: #f0d060; }
+
+.divider {
+  height: 1px;
+  background: rgba(212, 175, 55, 0.06);
+  margin: 4px 0;
 }
 
 .settingRow {
@@ -91,9 +148,10 @@
 }
 
 .settingDesc {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
   color: #6b6b80;
+  line-height: 1.5;
 }
 
 /* Toggle switch */
@@ -139,9 +197,7 @@
   flex-shrink: 0;
 }
 
-.volumeIcon {
-  font-size: 0.9rem;
-}
+.volumeIcon { font-size: 0.9rem; }
 
 .volumeSlider {
   width: 80px;
@@ -166,7 +222,7 @@
 
 .volumeValue {
   font-family: 'JetBrains Mono', monospace;
-  font: 0.7rem;
+  font-size: 0.7rem;
   color: #a0a0b8;
   min-width: 30px;
   text-align: right;
@@ -184,22 +240,32 @@
 
 /* Info */
 .info {
-  margin-top: 24px;
-  padding: 16px;
+  margin-top: 20px;
+  padding: 14px;
   background: rgba(212, 175, 55, 0.04);
   border-radius: 8px;
   border: 1px solid rgba(212, 175, 55, 0.08);
 }
 
 .infoText {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
   color: #6b6b80;
   line-height: 1.6;
 }
 
+/* Version */
+.version {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(212, 175, 55, 0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #6b6b80;
+}
+
 @media (max-width: 768px) {
-  .panel {
-    width: 280px;
-  }
+  .panel { width: 280px; }
 }
